@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .glass-card-teal {
+    background: rgba(240, 253, 250, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(153, 246, 228, 0.6);
+  }
+
+  .glass-card-blue {
+    background: rgba(240, 249, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(186, 230, 253, 0.6);
+  }
+
+  .glass-card-emergency {
+    background: rgba(255, 241, 242, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(254, 205, 211, 0.8);
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

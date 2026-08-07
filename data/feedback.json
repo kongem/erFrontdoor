@@ -1,0 +1,363 @@
+[
+  {
+    "id": "ENTRY-1786121672756-4308",
+    "timestamp": "2026-08-07T16:54:32.756Z",
+    "type": "helpfulness_rating",
+    "rating": null,
+    "helpful": true,
+    "helpedDecide": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "Very reassuring guidance!",
+    "userAgent": "node"
+  },
+  {
+    "id": "ENTRY-1786121672810-4138",
+    "timestamp": "2026-08-07T16:54:32.810Z",
+    "type": "support_request",
+    "ticketNumber": "SUP-539443",
+    "parentName": "Sarah Jenkins",
+    "email": "sarah@example.com",
+    "phone": "",
+    "childAge": "",
+    "topic": "triage-help",
+    "urgency": "routine",
+    "message": "Assistance with ER parking directions."
+  },
+  {
+    "id": "ENTRY-1786121672858-9514",
+    "timestamp": "2026-08-07T16:54:32.858Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-977091",
+    "doctorName": "Dr. Watson",
+    "doctorEmail": "dr.watson@clinic.ca",
+    "childName": "Leo",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [],
+    "message": "Referral copy for chart.",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786123344823-508",
+    "timestamp": "2026-08-07T17:22:24.823Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-349026",
+    "doctorName": "Parent / Guardian",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Child",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
+      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786123871364-1449",
+    "timestamp": "2026-08-07T17:31:11.364Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-977073",
+    "doctorName": "Dr Kong",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK Kong",
+    "triageTitle": "Routine Care & Primary Pediatrician Follow-up",
+    "triageCategory": "LOW_PRIMARY_CARE",
+    "actionPlan": [
+      "Ensure your child gets plenty of rest and stays hydrated with fluids or popsicles.",
+      "You may give pediatric fever reducers if your child is uncomfortable (never give Aspirin to children).",
+      "Monitor temperature and symptoms every 4–6 hours.",
+      "Contact your pediatrician if fever exceeds 3 days or if new symptoms appear."
+    ],
+    "message": "hi this is traige",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786123879242-7304",
+    "timestamp": "2026-08-07T17:31:19.242Z",
+    "type": "helpfulness_rating",
+    "rating": null,
+    "helpful": true,
+    "helpedDecide": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786123887463-7042",
+    "timestamp": "2026-08-07T17:31:27.463Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786124056343-9730",
+    "timestamp": "2026-08-07T17:34:16.343Z",
+    "type": "helpfulness_rating",
+    "rating": null,
+    "helpful": false,
+    "helpedDecide": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786124158079-4908",
+    "timestamp": "2026-08-07T17:35:58.079Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-367775",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
+      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786124165529-2051",
+    "timestamp": "2026-08-07T17:36:05.529Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786124550557-1013",
+    "timestamp": "2026-08-07T17:42:30.557Z",
+    "type": "helpfulness_rating",
+    "rating": null,
+    "helpful": true,
+    "helpedDecide": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786124553678-2485",
+    "timestamp": "2026-08-07T17:42:33.678Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-321487",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
+      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786124557916-6116",
+    "timestamp": "2026-08-07T17:42:37.916Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786128550874-4437",
+    "timestamp": "2026-08-07T18:49:10.874Z",
+    "type": "experience_feedback",
+    "rating": 4,
+    "helpful": null,
+    "helpedDecide": null,
+    "visitType": "education",
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786130844822-4763",
+    "timestamp": "2026-08-07T19:27:24.822Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-283641",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786130847538-9873",
+    "timestamp": "2026-08-07T19:27:27.538Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786130859560-9986",
+    "timestamp": "2026-08-07T19:27:39.560Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-850583",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786130886446-2466",
+    "timestamp": "2026-08-07T19:28:06.446Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-970345",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786131016392-3369",
+    "timestamp": "2026-08-07T19:30:16.392Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-220553",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786131019120-2163",
+    "timestamp": "2026-08-07T19:30:19.120Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786134357115-6409",
+    "timestamp": "2026-08-07T20:25:57.115Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-930105",
+    "doctorName": "ENOCH MING LOK KONG",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  },
+  {
+    "id": "ENTRY-1786134359662-2724",
+    "timestamp": "2026-08-07T20:25:59.662Z",
+    "type": "exit_survey",
+    "rating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786137359222-7132",
+    "timestamp": "2026-08-07T21:15:59.222Z",
+    "type": "helpfulness_rating",
+    "rating": null,
+    "helpful": false,
+    "helpedDecide": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786137374068-4358",
+    "timestamp": "2026-08-07T21:16:14.068Z",
+    "type": "pcp_referral_email",
+    "refId": "PCP-REF-837493",
+    "doctorName": "Samantha Li",
+    "doctorEmail": "kongenoch@gmail.com",
+    "childName": "Enoch MING LOK KONG",
+    "triageTitle": "Immediate Emergency Care Recommended",
+    "triageCategory": "HIGH_EMERGENCY",
+    "actionPlan": [
+      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
+      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+      "Bring health insurance card, photo ID, and any current medication bottles."
+    ],
+    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
+    "copySelf": true
+  }
+]
