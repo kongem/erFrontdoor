@@ -135,7 +135,7 @@ const LOCAL_STORAGE_KEY = 'pediatric_er_triage_v1';
 
 export function TriageProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<TriageState>({
-    step: 4,
+    step: 1,
     guardian: DEFAULT_GUARDIAN,
     child: DEFAULT_CHILD,
     symptoms: DEFAULT_SYMPTOMS,

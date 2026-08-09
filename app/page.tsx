@@ -31,8 +31,6 @@ import {
   Smile
 } from 'lucide-react';
 
-import DemographicsModal from '@/components/DemographicsModal';
-
 // Care Levels Data
 const CARE_LEVELS = [
   {
@@ -175,13 +173,12 @@ const STEPS = [
 
 export default function LandingPage() {
   const router = useRouter();
-  const { setStep, updateChild } = useTriage();
+  const { setStep, updateChild, resetTriage } = useTriage();
   const [activeTab, setActiveTab] = useState('er');
   const [faqSearch, setFaqSearch] = useState('');
   const [activeFaqCategory, setActiveFaqCategory] = useState('All');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [triageStarted, setTriageStarted] = useState(false);
-  const [demographicsModalOpen, setDemographicsModalOpen] = useState(false);
   const [showEligibility, setShowEligibility] = useState(false);
 
   useEffect(() => {
@@ -195,10 +192,11 @@ export default function LandingPage() {
   }, []);
 
   const handleStartTriage = (ageInMonths?: number) => {
+    resetTriage();
     if (ageInMonths !== undefined) {
       updateChild({ ageInMonths });
     }
-    setDemographicsModalOpen(true);
+    router.push('/triage');
   };
 
   const handleScrollToTriage = () => {
@@ -715,10 +713,6 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      <DemographicsModal
-        isOpen={demographicsModalOpen}
-        onClose={() => setDemographicsModalOpen(false)}
-      />
     </div>
   );
 }

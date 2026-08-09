@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   useTriage,
@@ -50,6 +51,19 @@ export default function TriageWizardPage() {
   const [printModalOpen, setPrintModalOpen] = useState(false);
   const [exitModalOpen, setExitModalOpen] = useState(false);
 
+  const router = useRouter();
+
+  const handleExitAssessment = () => {
+    resetTriage();
+    router.push('/');
+  };
+
+  const handleExitFeedbackClose = () => {
+    setExitModalOpen(false);
+    resetTriage();
+    router.push('/');
+  };
+
   const { step, guardian, child, symptoms, result, nearestFacilities, isHydrated } = state;
 
   if (!isHydrated) {
@@ -77,6 +91,7 @@ export default function TriageWizardPage() {
   const handleSymptomSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     evaluateAndSave();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Toggle Red Flag Symptom
@@ -112,7 +127,7 @@ export default function TriageWizardPage() {
           </Link>
 
           <button
-            onClick={() => setExitModalOpen(true)}
+            onClick={handleExitAssessment}
             className="text-xs font-semibold text-slate-500 hover:text-slate-800 underline"
           >
             Exit Assessment
@@ -409,10 +424,7 @@ export default function TriageWizardPage() {
             className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card-soft space-y-6"
           >
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1 rounded-full text-xs font-semibold">
-                <Baby className="w-3.5 h-3.5 text-teal-600" />
-                <span>Clinical Profile</span>
-              </div>
+
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 Additional Clinical Information
               </h2>
@@ -452,20 +464,6 @@ export default function TriageWizardPage() {
                 </div>
               </div>
 
-              <div className="space-y-3 pt-2 border-t border-slate-100">
-                <div className="flex items-center gap-3">
-                  <input
-                    type="checkbox"
-                    id="hasChronic"
-                    checked={child.hasChronicConditions}
-                    onChange={(e) => updateChild({ hasChronicConditions: e.target.checked })}
-                    className="w-5 h-5 text-teal-600 rounded focus:ring-teal-500 border-slate-300"
-                  />
-                  <label htmlFor="hasChronic" className="text-xs sm:text-sm font-semibold text-slate-800">
-                    Child has pre-existing chronic conditions (e.g. Asthma, Diabetes, Heart condition, Immunocompromised)
-                  </label>
-                </div>
-              </div>
 
               <div className="pt-4 flex items-center justify-between">
                 <button
@@ -771,46 +769,48 @@ export default function TriageWizardPage() {
             </div>
 
             {/* NEAREST ONTARIO FACILITIES */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Nearest Ontario Facilities
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Sorted by proximity to Postal Code: <strong>{guardian.postalCode}</strong>
-                  </p>
+            {result.category !== 'LOW_PRIMARY_CARE' && nearestFacilities.length > 0 && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <div>
+                    <h3 className="text-xl font-bold text-slate-900">
+                      Nearest Ontario Facilities
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Sorted by proximity to Postal Code: <strong>{guardian.postalCode}</strong>
+                    </p>
+                  </div>
+
                 </div>
 
-              </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {nearestFacilities.map((fac) => (
+                    <div
+                      key={fac.id}
+                      className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition space-y-3 flex flex-col justify-between"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-2">
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {nearestFacilities.map((fac) => (
-                  <div
-                    key={fac.id}
-                    className="bg-white rounded-2xl p-5 border border-slate-200 shadow-2xs hover:shadow-md transition space-y-3 flex flex-col justify-between"
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
+                          <span className="text-xs font-bold text-slate-500">
+                            📍 {fac.distanceKm} km away
+                          </span>
+                        </div>
 
-                        <span className="text-xs font-bold text-slate-500">
-                          📍 {fac.distanceKm} km away
-                        </span>
+                        <h4 className="text-base font-bold text-slate-900 leading-snug">
+                          {fac.name}
+                        </h4>
+
+                        <p className="text-xs text-slate-600 flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                          <span>{fac.address}</span>
+                        </p>
                       </div>
-
-                      <h4 className="text-base font-bold text-slate-900 leading-snug">
-                        {fac.name}
-                      </h4>
-
-                      <p className="text-xs text-slate-600 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
-                        <span>{fac.address}</span>
-                      </p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* EXPORT & ACTION MODAL BUTTONS */}
             <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-card-soft flex flex-wrap items-center justify-between gap-4">
@@ -850,7 +850,7 @@ export default function TriageWizardPage() {
 
             <ExitFeedbackModal
               isOpen={exitModalOpen}
-              onClose={() => setExitModalOpen(false)}
+              onClose={handleExitFeedbackClose}
             />
           </motion.div>
         )}

@@ -199,6 +199,73 @@ export const ONTARIO_PEDIATRIC_FACILITIES: PediatricFacility[] = [
   },
 ];
 
+export const ONTARIO_URGENT_CARE_CLINICS: PediatricFacility[] = [
+  {
+    id: 'toronto_peds_uc',
+    name: 'KidCare Pediatric Urgent Care Clinic',
+    shortName: 'KidCare Toronto',
+    city: 'Toronto',
+    address: '150 Eglinton Avenue East, Toronto, ON',
+    postalCode: 'M4P 1E8',
+    fsaPrefix: 'M4P',
+    phone: '(416) 488-5437',
+    emergencyPhone: '(416) 488-5437',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 25,
+    is247: false,
+    capabilities: [
+      'Minor Illness Assessment',
+      'Stitches & Laceration Care',
+      'Mild Asthma Treatment',
+      'On-site X-Ray & Splinting',
+    ],
+    coordinates: { latitude: 43.7067, longitude: -79.3948 },
+    websiteUrl: 'https://www.kidcareurgentcare.ca',
+  },
+  {
+    id: 'mississauga_peds_uc',
+    name: 'Peel Pediatric Urgent Care Clinic',
+    shortName: 'Peel UC Mississauga',
+    city: 'Mississauga',
+    address: '100 City Centre Drive, Mississauga, ON',
+    postalCode: 'L5B 2C9',
+    fsaPrefix: 'L5B',
+    phone: '(905) 896-1234',
+    emergencyPhone: '(905) 896-1234',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 15,
+    is247: false,
+    capabilities: [
+      'Pediatric Walk-in Clinic',
+      'Dehydration & Rehydration Therapy',
+      'Mild Allergy Management',
+    ],
+    coordinates: { latitude: 43.5930, longitude: -79.6425 },
+    websiteUrl: 'https://www.peelpediatricurgentcare.ca',
+  },
+  {
+    id: 'ottawa_peds_uc',
+    name: 'Ottawa East Pediatric Urgent Care',
+    shortName: 'Ottawa East UC',
+    city: 'Ottawa',
+    address: '1910 St. Laurent Boulevard, Ottawa, ON',
+    postalCode: 'K1G 1A4',
+    fsaPrefix: 'K1G',
+    phone: '(613) 523-9876',
+    emergencyPhone: '(613) 523-9876',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 20,
+    is247: false,
+    capabilities: [
+      'Urgent Pediatric Consultations',
+      'Minor Sports Injuries',
+      'Fever & Ear Infection Care',
+    ],
+    coordinates: { latitude: 45.3854, longitude: -75.6321 },
+    websiteUrl: 'https://www.ottawapedsurgentcare.ca',
+  },
+];
+
 /**
  * Calculates straight-line distance in kilometers using the Haversine formula.
  */
@@ -326,7 +393,14 @@ export function findNearestFacilities(
 ): FacilityWithDistance[] {
   const userCoord = getCoordinatesForPostalCode(userPostalCode || 'M5G 1X8');
 
-  const listWithDistance = ONTARIO_PEDIATRIC_FACILITIES.map((facility) => {
+  let facilitiesSource = ONTARIO_PEDIATRIC_FACILITIES;
+  if (category === 'MODERATE_URGENT_CARE') {
+    facilitiesSource = ONTARIO_URGENT_CARE_CLINICS;
+  } else if (category === 'LOW_PRIMARY_CARE') {
+    return [];
+  }
+
+  const listWithDistance = facilitiesSource.map((facility) => {
     const distanceKm = calculateHaversineDistance(
       userCoord.latitude,
       userCoord.longitude,
@@ -341,11 +415,6 @@ export function findNearestFacilities(
 
   // Sort by distance ascending
   listWithDistance.sort((a, b) => a.distanceKm - b.distanceKm);
-
-  // Filter if high emergency requires Level 1 trauma
-  if (category === 'HIGH_EMERGENCY') {
-    return listWithDistance; // Show trauma & emergency first
-  }
 
   return listWithDistance;
 }

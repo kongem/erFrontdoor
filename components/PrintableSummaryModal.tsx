@@ -76,13 +76,13 @@ export default function PrintableSummaryModal({
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative space-y-6">
-        
+
         {/* Header Action Buttons */}
         <div className="flex items-center justify-between border-b border-slate-100 pb-4">
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-teal-600" />
             <h3 className="text-lg font-bold text-slate-900">
-              Pediatric Triage Summary (PCP Referral Copy)
+              Triage Summary
             </h3>
           </div>
 
@@ -103,7 +103,7 @@ export default function PrintableSummaryModal({
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-teal-600 fill-current print:text-black" />
                 <span className="text-xl font-extrabold text-slate-900">
-                  LittleCare Pediatric Health System
+                  REVAMP PedsER
                 </span>
               </div>
               <p className="text-xs text-slate-500 font-semibold mt-1">
@@ -118,13 +118,12 @@ export default function PrintableSummaryModal({
           </div>
 
           {/* Urgency Category Banner */}
-          <div className={`p-4 rounded-2xl border ${
-            result.category === 'HIGH_EMERGENCY'
-              ? 'bg-rose-50 border-rose-300 text-rose-950'
-              : result.category === 'MODERATE_URGENT_CARE'
+          <div className={`p-4 rounded-2xl border ${result.category === 'HIGH_EMERGENCY'
+            ? 'bg-rose-50 border-rose-300 text-rose-950'
+            : result.category === 'MODERATE_URGENT_CARE'
               ? 'bg-amber-50 border-amber-300 text-amber-950'
               : 'bg-teal-50 border-teal-300 text-teal-950'
-          }`}>
+            }`}>
             <div className="flex items-center justify-between font-bold text-base">
               <span>Triage Classification: {result.title}</span>
               <span className="px-3 py-1 text-xs rounded-full bg-slate-900 text-white">
@@ -176,7 +175,7 @@ export default function PrintableSummaryModal({
                 <span className="text-xs text-slate-600 capitalize">
                   {symptoms.primarySymptom ? symptoms.primarySymptom.replace('_', ' ') : 'Fever'}
                   {symptoms.primarySymptom === 'fever' && symptoms.hasFever && (
-                    ` (${symptoms.feverTempCelsius}°C / ${(symptoms.feverTempCelsius * 9/5 + 32).toFixed(1)}°F for ${symptoms.feverDurationHours}h)`
+                    ` (${symptoms.feverTempCelsius}°C / ${(symptoms.feverTempCelsius * 9 / 5 + 32).toFixed(1)}°F for ${symptoms.feverDurationHours}h)`
                   )}
                 </span>
               </div>
@@ -227,7 +226,7 @@ export default function PrintableSummaryModal({
           {/* Signatures & Disclaimer */}
           <div className="pt-4 border-t border-slate-200 text-[11px] text-slate-400 space-y-2">
             <p>
-              <strong>Notice for Primary Care Provider:</strong> This assessment was generated via LittleCare Pediatric Digital Front Door using AboutKidsHealth decision protocols. Please file this summary in the patient’s chart.
+              <strong>Notice for Primary Care Provider:</strong> This assessment was generated via REVAMP PedsER Digital Front Door using AboutKidsHealth decision protocols. Please file this summary in the patient’s chart.
             </p>
           </div>
         </div>

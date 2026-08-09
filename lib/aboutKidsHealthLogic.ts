@@ -158,7 +158,7 @@ export interface TriageEvaluationResult {
   timeframeNotice: string;
   actionPlan: string[];
   redFlagsTriggered: string[];
-  recommendedFacilityType: 'Emergency Room' | 'Urgent Care Clinic' | 'Pediatrician / Family Doctor';
+  recommendedFacilityType: 'Pediatric Emergency Room' | 'Emergency Room' | 'Urgent Care Clinic' | 'Pediatrician / Family Doctor';
   disclaimer: string;
 }
 
