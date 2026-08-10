@@ -304,7 +304,7 @@ export default function TriageWizardPage() {
                     <input
                       type="text"
                       required
-                      placeholder="L5N 6N6"
+                      placeholder=""
                       value={guardian.postalCode || ''}
                       onChange={(e) => {
                         updateGuardian({ postalCode: e.target.value });

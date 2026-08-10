@@ -156,7 +156,7 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
         const guardian = { ...DEFAULT_GUARDIAN, ...(parsed.guardian || {}) };
         const child = { ...DEFAULT_CHILD, ...(parsed.child || {}) };
         const symptoms = { ...DEFAULT_SYMPTOMS, ...(parsed.symptoms || {}) };
-        
+
         // Recalculate nearest facilities using the loaded postal code
         const nearestFacilities = findNearestFacilities(guardian.postalCode || child.postalCode);
 

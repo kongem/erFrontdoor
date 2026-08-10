@@ -381,9 +381,9 @@ function calculateHaversineDistance(lat1: number, lon1: number, lat2: number, lo
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return Math.round(R * c * 10) / 10;
 }
@@ -441,7 +441,7 @@ export function getCoordinatesForPostalCode(postal: string): FacilityCoordinates
     'M6': { latitude: 43.6601, longitude: -79.4589 },
     'M8': { latitude: 43.6229, longitude: -79.5061 },
     'M9': { latitude: 43.6878, longitude: -79.5828 },
-    
+
     // GTA / Central
     'L1': { latitude: 43.8971, longitude: -78.8658 },
     'L2': { latitude: 43.1594, longitude: -79.2449 },
@@ -452,12 +452,12 @@ export function getCoordinatesForPostalCode(postal: string): FacilityCoordinates
     'L7': { latitude: 43.3248, longitude: -79.7969 },
     'L8': { latitude: 43.2557, longitude: -79.8711 },
     'L9': { latitude: 44.3894, longitude: -79.6903 },
-    
+
     // Ottawa / Eastern
     'K1': { latitude: 45.4215, longitude: -75.6972 },
     'K2': { latitude: 45.3483, longitude: -75.7583 },
     'K7': { latitude: 44.2312, longitude: -76.4860 },
-    
+
     // Southwestern
     'N1': { latitude: 43.5448, longitude: -80.2476 },
     'N2': { latitude: 43.4516, longitude: -80.4925 },
@@ -465,7 +465,7 @@ export function getCoordinatesForPostalCode(postal: string): FacilityCoordinates
     'N5': { latitude: 42.9849, longitude: -81.2453 },
     'N6': { latitude: 42.9849, longitude: -81.2453 },
     'N8': { latitude: 42.3149, longitude: -83.0364 },
-    
+
     // Northern
     'P3': { latitude: 46.4917, longitude: -81.0123 },
     'P7': { latitude: 48.3809, longitude: -89.2477 },
