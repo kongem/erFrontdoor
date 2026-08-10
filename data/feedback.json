@@ -1,226 +1,1255 @@
 [
   {
-    "id": "ENTRY-1786121672756-4308",
-    "timestamp": "2026-08-07T16:54:32.756Z",
-    "type": "helpfulness_rating",
-    "rating": null,
-    "helpful": true,
-    "helpedDecide": null,
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "Very reassuring guidance!",
-    "userAgent": "node"
+    "id": "MOCK-CASE-1",
+    "timestamp": "2026-08-09T10:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100001",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. John Watson",
+      "doctorEmail": "watson@example.com",
+      "timestamp": "2026-08-09T10:05:00.000Z"
+    },
+    "child": {
+      "name": "Oliver Smith",
+      "ageInMonths": 14,
+      "sex": "male",
+      "weightKg": 11.2,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "M4S 2B9"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.6,
+      "feverDurationHours": 24,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "lethargy_mild",
+        "reduced_appetite"
+      ],
+      "additionalNotes": "Sleeping slightly more than usual, but waking up to drink formula."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Your child is showing mild/moderate symptoms. We recommend checking in at an Urgent Care clinic within 24 hours.",
+      "actionPlan": [
+        "Give pediatric acetaminophen/ibuprofen for fever relief.",
+        "Offer fluids frequently to prevent dehydration.",
+        "Monitor temperature every 4 hours."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786121672810-4138",
-    "timestamp": "2026-08-07T16:54:32.810Z",
-    "type": "support_request",
-    "ticketNumber": "SUP-539443",
-    "parentName": "Sarah Jenkins",
-    "email": "sarah@example.com",
-    "phone": "",
-    "childAge": "",
-    "topic": "triage-help",
-    "urgency": "routine",
-    "message": "Assistance with ER parking directions."
+    "id": "MOCK-CASE-2",
+    "timestamp": "2026-08-09T10:30:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100002",
+    "emailSent": false,
+    "child": {
+      "name": "Sophia Patel",
+      "ageInMonths": 8,
+      "sex": "female",
+      "weightKg": 8.5,
+      "hasChronicConditions": true
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "L5B 2C9"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "stridor_at_rest",
+        "chest_indrawing"
+      ],
+      "selectedSecondarySymptoms": [
+        "cough_barking"
+      ],
+      "additionalNotes": "Has a history of asthma, using her inhaler but chest is still pulling in."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Immediate pediatric emergency evaluation is required. Head directly to the closest Emergency Department.",
+      "actionPlan": [
+        "Call 911 immediately if breathing worsens or color changes.",
+        "Go directly to the nearest Pediatric ER.",
+        "Bring all current inhalers and medications."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786121672858-9514",
-    "timestamp": "2026-08-07T16:54:32.858Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-977091",
-    "doctorName": "Dr. Watson",
-    "doctorEmail": "dr.watson@clinic.ca",
-    "childName": "Leo",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [],
-    "message": "Referral copy for chart.",
-    "copySelf": true
+    "id": "MOCK-CASE-3",
+    "timestamp": "2026-08-09T11:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100003",
+    "emailSent": false,
+    "child": {
+      "name": "Ethan Vance",
+      "ageInMonths": 36,
+      "sex": "male",
+      "weightKg": 15,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Grandmother",
+      "postalCode": "K1G 1A4"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "itchiness_mild"
+      ],
+      "additionalNotes": "Developed a localized red rash on forearms after playing in the garden."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "This condition appears suitable for routine follow-up with your family doctor or pediatrician.",
+      "actionPlan": [
+        "Keep the rash clean and dry.",
+        "Apply cool compresses to ease mild itchiness.",
+        "Book an appointment with your family physician."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786123344823-508",
-    "timestamp": "2026-08-07T17:22:24.823Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-349026",
-    "doctorName": "Parent / Guardian",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Child",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
-      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "MOCK-CASE-4",
+    "timestamp": "2026-08-09T11:15:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100004",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Sarah Miller",
+      "doctorEmail": "sarah.m@clinic.ca",
+      "timestamp": "2026-08-09T11:20:00.000Z"
+    },
+    "child": {
+      "name": "Emma Watson",
+      "ageInMonths": 18,
+      "sex": "female",
+      "weightKg": 10.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "cough_barking",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "cough_barking",
+        "runny_nose"
+      ],
+      "additionalNotes": "Cough sounds a bit like a bark, but she is happy and eating well."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Croup symptoms detected. Immediate emergency assessment is required.",
+      "actionPlan": [
+        "Go directly to the nearest Pediatric Emergency Department.",
+        "Keep the child upright and calm."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786123871364-1449",
-    "timestamp": "2026-08-07T17:31:11.364Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-977073",
-    "doctorName": "Dr Kong",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK Kong",
-    "triageTitle": "Routine Care & Primary Pediatrician Follow-up",
-    "triageCategory": "LOW_PRIMARY_CARE",
-    "actionPlan": [
-      "Ensure your child gets plenty of rest and stays hydrated with fluids or popsicles.",
-      "You may give pediatric fever reducers if your child is uncomfortable (never give Aspirin to children).",
-      "Monitor temperature and symptoms every 4–6 hours.",
-      "Contact your pediatrician if fever exceeds 3 days or if new symptoms appear."
-    ],
-    "message": "hi this is traige",
-    "copySelf": true
+    "id": "MOCK-CASE-5",
+    "timestamp": "2026-08-09T11:30:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100005",
+    "emailSent": false,
+    "child": {
+      "name": "Liam Neeson",
+      "ageInMonths": 29,
+      "sex": "male",
+      "weightKg": 14.1,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "L4B 3M6"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.3,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "runny_nose"
+      ],
+      "additionalNotes": "Developed a low fever overnight. Runny nose, slightly irritable."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Mild to moderate fever symptoms. Urgent Care clinic follow-up recommended.",
+      "actionPlan": [
+        "Provide pediatric fever reducers.",
+        "Monitor temperature.",
+        "Visit urgent care within 24 hours."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786123879242-7304",
-    "timestamp": "2026-08-07T17:31:19.242Z",
-    "type": "helpfulness_rating",
-    "rating": null,
-    "helpful": true,
-    "helpedDecide": null,
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-6",
+    "timestamp": "2026-08-09T11:45:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100006",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Davis",
+      "doctorEmail": "davis@pediatrics.ca",
+      "timestamp": "2026-08-09T11:50:00.000Z"
+    },
+    "child": {
+      "name": "Ava Davis",
+      "ageInMonths": 48,
+      "sex": "female",
+      "weightKg": 18.2,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "K2A 1T4"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Small dry rash on elbow. No itching or pain."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "Routine primary pediatrician follow-up is recommended.",
+      "actionPlan": [
+        "Keep skin moisturized.",
+        "Schedule appointment with pediatrician."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786123887463-7042",
-    "timestamp": "2026-08-07T17:31:27.463Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-7",
+    "timestamp": "2026-08-09T12:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100007",
+    "emailSent": false,
+    "child": {
+      "name": "Noah Carter",
+      "ageInMonths": 22,
+      "sex": "male",
+      "weightKg": 12.8,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "N6A 3K7"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.9,
+      "feverDurationHours": 48,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "reduced_appetite",
+        "lethargy_mild"
+      ],
+      "additionalNotes": "Fever remains high despite acetaminophen. Eating less."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Persistent fever with mild behavioral changes. Urgent Care visit recommended.",
+      "actionPlan": [
+        "Alternate acetaminophen and ibuprofen.",
+        "Ensure fluid intake.",
+        "See a doctor at urgent care today."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124056343-9730",
-    "timestamp": "2026-08-07T17:34:16.343Z",
-    "type": "helpfulness_rating",
-    "rating": null,
-    "helpful": false,
-    "helpedDecide": null,
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-8",
+    "timestamp": "2026-08-09T12:15:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100008",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Martin",
+      "doctorEmail": "martin@health.ca",
+      "timestamp": "2026-08-09T12:20:00.000Z"
+    },
+    "child": {
+      "name": "Olivia Martin",
+      "ageInMonths": 6,
+      "sex": "female",
+      "weightKg": 7.1,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "M4Y 1H2"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "chest_indrawing"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Noticeable chest indrawing under the ribs when inhaling."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Severe respiratory symptoms. Immediate Emergency Room visit required.",
+      "actionPlan": [
+        "Head directly to the emergency department.",
+        "Call 911 if child turns pale or blue."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124158079-4908",
-    "timestamp": "2026-08-07T17:35:58.079Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-367775",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
-      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "MOCK-CASE-9",
+    "timestamp": "2026-08-09T12:30:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100009",
+    "emailSent": false,
+    "child": {
+      "name": "Lucas Brown",
+      "ageInMonths": 60,
+      "sex": "male",
+      "weightKg": 20.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "M6G 2T1"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "itchiness_mild"
+      ],
+      "additionalNotes": "Mild red spots on trunk. Very slightly itchy."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "Non-urgent symptoms. Follow-up with primary care physician.",
+      "actionPlan": [
+        "Apply calamine lotion if itchy.",
+        "Consult pediatrician."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124165529-2051",
-    "timestamp": "2026-08-07T17:36:05.529Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-10",
+    "timestamp": "2026-08-09T12:45:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100010",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Isabella Watson",
+      "doctorEmail": "isabella@clinic.ca",
+      "timestamp": "2026-08-09T12:50:00.000Z"
+    },
+    "child": {
+      "name": "Isabella Garcia",
+      "ageInMonths": 17,
+      "sex": "female",
+      "weightKg": 11,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "L6H 2J9"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 24,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "runny_nose"
+      ],
+      "additionalNotes": "Teething and has a slight fever. Eating and sleeping normally."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Fever present. Walk-in clinic or urgent care check recommended.",
+      "actionPlan": [
+        "Keep hydrated.",
+        "Provide acetaminophen."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124550557-1013",
-    "timestamp": "2026-08-07T17:42:30.557Z",
-    "type": "helpfulness_rating",
-    "rating": null,
-    "helpful": true,
-    "helpedDecide": null,
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-11",
+    "timestamp": "2026-08-09T13:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100011",
+    "emailSent": false,
+    "child": {
+      "name": "Mason Rodriguez",
+      "ageInMonths": 11,
+      "sex": "male",
+      "weightKg": 10.1,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "M3H 5T8"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "stridor_at_rest"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "High pitched squeaking sound when breathing while sitting quiet."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Stridor at rest detected. Emergency medical care required.",
+      "actionPlan": [
+        "Head directly to the nearest ER.",
+        "Do not offer foods or drinks."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124553678-2485",
-    "timestamp": "2026-08-07T17:42:33.678Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-321487",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having an active seizure.",
-      "If safe to travel, head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "MOCK-CASE-12",
+    "timestamp": "2026-08-09T13:15:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100012",
+    "emailSent": false,
+    "child": {
+      "name": "Mia Wilson",
+      "ageInMonths": 30,
+      "sex": "female",
+      "weightKg": 13.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "K1N 6B5"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Dry skin patches on thighs. Otherwise completely fine."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "Routine pediatric follow-up recommended.",
+      "actionPlan": [
+        "Use child lotion.",
+        "Check with pediatrician at next routine visit."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786124557916-6116",
-    "timestamp": "2026-08-07T17:42:37.916Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+    "id": "MOCK-CASE-13",
+    "timestamp": "2026-08-09T13:30:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100013",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Logan",
+      "doctorEmail": "logan@med.ca",
+      "timestamp": "2026-08-09T13:35:00.000Z"
+    },
+    "child": {
+      "name": "Logan Thomas",
+      "ageInMonths": 25,
+      "sex": "male",
+      "weightKg": 13.9,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "M5J 2N8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.4,
+      "feverDurationHours": 24,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "runny_nose"
+      ],
+      "additionalNotes": "Fever of 38.4C. Running nose, active and playful."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Fever present. Walk-in clinic or urgent care check recommended.",
+      "actionPlan": [
+        "Manage fever with ibuprofen.",
+        "Monitor fluid intake."
+      ]
+    }
   },
   {
-    "id": "ENTRY-1786128550874-4437",
-    "timestamp": "2026-08-07T18:49:10.874Z",
-    "type": "experience_feedback",
+    "id": "MOCK-CASE-14",
+    "timestamp": "2026-08-09T13:45:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100014",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Charlotte",
+      "doctorEmail": "charlotte@clinic.ca",
+      "timestamp": "2026-08-09T13:50:00.000Z"
+    },
+    "child": {
+      "name": "Charlotte Martinez",
+      "ageInMonths": 15,
+      "sex": "female",
+      "weightKg": 10.2,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "L4Z 1Y3"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "stridor_at_rest"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Breathing makes a barking sound when sleeping."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Stridor at rest detected. Emergency medical care required.",
+      "actionPlan": [
+        "Head directly to nearest ER.",
+        "Keep upright."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-15",
+    "timestamp": "2026-08-09T14:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100015",
+    "emailSent": false,
+    "child": {
+      "name": "James Anderson",
+      "ageInMonths": 72,
+      "sex": "male",
+      "weightKg": 22,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "N2L 3G1"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Slight redness on cheek. No other symptoms."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "Routine primary pediatrician follow-up is recommended.",
+      "actionPlan": [
+        "Keep cheek clean.",
+        "Check with doctor."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-16",
+    "timestamp": "2026-08-09T14:15:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100016",
+    "emailSent": false,
+    "child": {
+      "name": "Amelia Taylor",
+      "ageInMonths": 9,
+      "sex": "female",
+      "weightKg": 8.8,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "M5V 3M6"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.4,
+      "feverDurationHours": 18,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "reduced_appetite"
+      ],
+      "additionalNotes": "Baby has a mild fever. Eating slightly less but alert."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Fever present. Walk-in clinic or urgent care check recommended.",
+      "actionPlan": [
+        "Alternate fever reducers.",
+        "Ensure baby is hydrated."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-17",
+    "timestamp": "2026-08-09T14:30:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100017",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Benjamin",
+      "doctorEmail": "benjamin@health.ca",
+      "timestamp": "2026-08-09T14:35:00.000Z"
+    },
+    "child": {
+      "name": "Benjamin Thomas",
+      "ageInMonths": 20,
+      "sex": "male",
+      "weightKg": 11.9,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "L3R 9S9"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "chest_indrawing"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Tug under throat and ribs when breathing."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Respiratory distress signs. Head to ER immediately.",
+      "actionPlan": [
+        "Go straight to closest ER.",
+        "Call 911 if breathing fails."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-18",
+    "timestamp": "2026-08-09T14:45:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100018",
+    "emailSent": false,
+    "child": {
+      "name": "Harper White",
+      "ageInMonths": 54,
+      "sex": "female",
+      "weightKg": 17.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "K1S 5J3"
+    },
+    "symptoms": {
+      "primarySymptom": "rash",
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Dry skin scales on knees. No pain."
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Primary Care",
+      "badgeBg": "bg-teal-500/20 text-teal-400 border-teal-500/30",
+      "summary": "Routine pediatric check recommended.",
+      "actionPlan": [
+        "Use moisturizers.",
+        "Schedule appointment."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-19",
+    "timestamp": "2026-08-09T15:00:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100019",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Harris",
+      "doctorEmail": "harris@clinic.ca",
+      "timestamp": "2026-08-09T15:05:00.000Z"
+    },
+    "child": {
+      "name": "Jacob Harris",
+      "ageInMonths": 16,
+      "sex": "male",
+      "weightKg": 11.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Father",
+      "postalCode": "M4E 2L7"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.3,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "runny_nose"
+      ],
+      "additionalNotes": "Fever of 38.3C since this morning. Running nose, playful."
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Moderate Urgent Care Recommended",
+      "badgeText": "Urgent Care",
+      "badgeBg": "bg-amber-500/20 text-amber-400 border-amber-500/30",
+      "summary": "Fever present. Walk-in clinic or urgent care check recommended.",
+      "actionPlan": [
+        "Manage fever with ibuprofen.",
+        "Monitor fluid intake."
+      ]
+    }
+  },
+  {
+    "id": "MOCK-CASE-20",
+    "timestamp": "2026-08-09T15:15:00.000Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-100020",
+    "emailSent": true,
+    "emailDetails": {
+      "doctorName": "Dr. Evelyn Clark",
+      "doctorEmail": "clark@pediatrics.ca",
+      "timestamp": "2026-08-09T15:20:00.000Z"
+    },
+    "child": {
+      "name": "Evelyn Clark",
+      "ageInMonths": 10,
+      "sex": "female",
+      "weightKg": 9.2,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Mother",
+      "postalCode": "L5M 5Y9"
+    },
+    "symptoms": {
+      "primarySymptom": "breathing_difficulty",
+      "selectedRedFlags": [
+        "chest_indrawing"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": "Fast breathing, pulling in chest ribs."
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Emergency Room",
+      "badgeBg": "bg-rose-500/20 text-rose-450 border-rose-500/30",
+      "summary": "Respiratory distress signs. Head to ER immediately.",
+      "actionPlan": [
+        "Go straight to closest ER.",
+        "Call 911 if breathing fails."
+      ]
+    }
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-1",
+    "timestamp": "2026-08-09T11:00:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100001",
+    "rating": 5,
+    "comment": "Triage evaluation was extremely precise. The action items are perfect and reflect standard pediatric emergency procedures."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-2",
+    "timestamp": "2026-08-09T11:10:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100002",
+    "rating": 3,
+    "comment": "Clinical recommendation is accurate, but the Step 3 symptom questionnaire has some cluttered spacing on smaller mobile layouts. The labels should be more compact."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-3",
+    "timestamp": "2026-08-09T11:20:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100003",
     "rating": 4,
+    "comment": "Follow-up advice was perfect for this localized skin rash. Family doctor follow-up prevents unnecessary ER crowding."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-4",
+    "timestamp": "2026-08-09T11:25:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100004",
+    "rating": 2,
+    "comment": "Over-triaged a minor croup bark to High Emergency. If there is no stridor at rest, we should route to Urgent Care rather than forcing an ER visit."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-5",
+    "timestamp": "2026-08-09T11:35:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100005",
+    "rating": 1,
+    "comment": "Workflow to access triage is too slow. Clinicians and parents would prefer entering symptoms first and registering demographic details afterwards."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-6",
+    "timestamp": "2026-08-09T11:55:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100006",
+    "rating": 4,
+    "comment": "Primary care recommendation was accurate. Good reassurance logic for dry skin patches."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-7",
+    "timestamp": "2026-08-09T12:05:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100007",
+    "rating": 3,
+    "comment": "Would be extremely helpful if the system automatically calculated child fever reducer dosage (acetaminophen/ibuprofen) based on the child's weight in kilograms."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-8",
+    "timestamp": "2026-08-09T12:25:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100008",
+    "rating": 5,
+    "comment": "Excellent routing. Chest indrawing is a clear red flag requiring pediatric ER."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-9",
+    "timestamp": "2026-08-09T12:35:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100009",
+    "rating": 2,
+    "comment": "The exit assessment button at the top does not warn the user that they will lose their state. It should pop up a confirmation warning before returning to the landing page."
+  },
+  {
+    "id": "PROVIDER-FEEDBACK-10",
+    "timestamp": "2026-08-09T12:55:00.000Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100010",
+    "rating": 5,
+    "comment": "Accurate triage. Minor fever with runny nose was appropriately categorized as Moderate Urgent Care."
+  },
+  {
+    "id": "ENTRY-1786325816382-9188",
+    "timestamp": "2026-08-10T01:36:56.382Z",
+    "updatedAt": "2026-08-10T01:36:56.382Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-257250",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 10,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L5N 6P2"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 39.5,
+      "feverDurationHours": 3,
+      "selectedRedFlags": [
+        "seizure_activity"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Seizure or Convulsion) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "seizure_activity"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for fever. Seek emergency care immediately."
+    },
+    "emailDetails": {
+      "doctorName": "mansi",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-10T01:38:42.276Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786326118369-894",
+    "timestamp": "2026-08-10T01:41:58.369Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100012",
+    "rating": 3,
     "helpful": null,
     "helpedDecide": null,
-    "visitType": "education",
+    "visitType": null,
     "selectedTags": [],
     "comment": "",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   },
   {
-    "id": "ENTRY-1786130844822-4763",
-    "timestamp": "2026-08-07T19:27:24.822Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-283641",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "ENTRY-1786326370840-8492",
+    "timestamp": "2026-08-10T01:46:10.840Z",
+    "updatedAt": "2026-08-10T01:46:10.840Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-362549",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "seizure_activity"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Seizure or Convulsion) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "seizure_activity"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for fever. Seek emergency care immediately."
+    }
   },
   {
-    "id": "ENTRY-1786130847538-9873",
-    "timestamp": "2026-08-07T19:27:27.538Z",
+    "id": "ENTRY-1786327279994-3172",
+    "timestamp": "2026-08-10T02:01:19.994Z",
+    "updatedAt": "2026-08-10T02:01:19.994Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-600642",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "infant_fever"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Infant Fever (< 3 Months)) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "infant_fever"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for fever. Seek emergency care immediately."
+    }
+  },
+  {
+    "id": "ENTRY-1786327441664-5404",
+    "timestamp": "2026-08-10T02:04:01.665Z",
+    "updatedAt": "2026-08-10T02:04:01.665Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-628332",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "sti_mild_swelling"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Bruising and localized swelling) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for soft tissue_injury."
+    }
+  },
+  {
+    "id": "ENTRY-1786327547016-8067",
+    "timestamp": "2026-08-10T02:05:47.016Z",
+    "updatedAt": "2026-08-10T02:05:47.016Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-983641",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 48,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "earache_severe"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Severe localized pain) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for fever."
+    }
+  },
+  {
+    "id": "ENTRY-1786327637609-9184",
+    "timestamp": "2026-08-10T02:07:17.609Z",
+    "updatedAt": "2026-08-10T02:07:17.609Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-361679",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "head_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
+  },
+  {
+    "id": "ENTRY-1786327764818-3543",
+    "timestamp": "2026-08-10T02:09:24.818Z",
+    "updatedAt": "2026-08-10T02:09:24.819Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-239223",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "chest_tender"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Chest wall tenderness) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for chest pain."
+    },
+    "emailDetails": {
+      "doctorName": "fdsa",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-10T02:09:33.623Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786327783486-6070",
+    "timestamp": "2026-08-10T02:09:43.486Z",
     "type": "exit_survey",
+    "refId": null,
     "rating": null,
     "helpful": null,
     "helpedDecide": "yes",
@@ -230,202 +1259,180 @@
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   },
   {
-    "id": "ENTRY-1786130859560-9986",
-    "timestamp": "2026-08-07T19:27:39.560Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-850583",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "ENTRY-1786328584785-4468",
+    "timestamp": "2026-08-10T02:23:04.785Z",
+    "updatedAt": "2026-08-10T02:23:04.785Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-514180",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
   },
   {
-    "id": "ENTRY-1786130886446-2466",
-    "timestamp": "2026-08-07T19:28:06.446Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-970345",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "ENTRY-1786328600243-1189",
+    "timestamp": "2026-08-10T02:23:20.243Z",
+    "updatedAt": "2026-08-10T02:23:20.243Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-496020",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "abdominal_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "abd_bilious_vomiting",
+        "abd_high_fever",
+        "abd_blood_stool",
+        "abd_swollen_hard"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Persistent or Bilious (Green) Vomiting, High Fever with Stomach Pain, Blood in Stool or Vomit, Swollen, Hard, or Rigid Abdomen) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "abd_bilious_vomiting",
+        "abd_high_fever",
+        "abd_blood_stool",
+        "abd_swollen_hard"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for abdominal pain. Seek emergency care immediately."
+    }
   },
   {
-    "id": "ENTRY-1786131016392-3369",
-    "timestamp": "2026-08-07T19:30:16.392Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-220553",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "ENTRY-1786328653581-8893",
+    "timestamp": "2026-08-10T02:24:13.581Z",
+    "updatedAt": "2026-08-10T02:24:13.581Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-870290",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L7M 6m5"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "chest_breathing",
+        "chest_pale_sweaty",
+        "chest_syncope",
+        "chest_palpitations"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Breathing Difficulty / Shortness of Breath, Pale, Sweaty Skin or Blue Lips, Fainting, Dizziness, or Lightheadedness, Racing or Skipping Heartbeat) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "chest_breathing",
+        "chest_pale_sweaty",
+        "chest_syncope",
+        "chest_palpitations"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for chest pain. Seek emergency care immediately."
+    }
   },
   {
-    "id": "ENTRY-1786131019120-2163",
-    "timestamp": "2026-08-07T19:30:19.120Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
-  },
-  {
-    "id": "ENTRY-1786134357115-6409",
-    "timestamp": "2026-08-07T20:25:57.115Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-930105",
-    "doctorName": "ENOCH MING LOK KONG",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786134359662-2724",
-    "timestamp": "2026-08-07T20:25:59.662Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
-  },
-  {
-    "id": "ENTRY-1786137359222-7132",
-    "timestamp": "2026-08-07T21:15:59.222Z",
-    "type": "helpfulness_rating",
-    "rating": null,
-    "helpful": false,
-    "helpedDecide": null,
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
-  },
-  {
-    "id": "ENTRY-1786137374068-4358",
-    "timestamp": "2026-08-07T21:16:14.068Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-837493",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Pediatric Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786152109512-5392",
-    "timestamp": "2026-08-08T01:21:49.512Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-117526",
-    "doctorName": "Samantha Li",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Same-Day Urgent Care Recommended",
-    "triageCategory": "MODERATE_URGENT_CARE",
-    "actionPlan": [
-      "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
-      "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
-      "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786152117093-6807",
-    "timestamp": "2026-08-08T01:21:57.093Z",
-    "type": "exit_survey",
-    "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
-  },
-  {
-    "id": "ENTRY-1786152222927-5481",
-    "timestamp": "2026-08-08T01:23:42.927Z",
-    "type": "exit_survey",
-    "rating": null,
+    "id": "ENTRY-1786329047133-5200",
+    "timestamp": "2026-08-10T02:30:47.133Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-870290",
+    "rating": 1,
     "helpful": null,
     "helpedDecide": null,
     "visitType": null,
     "selectedTags": [],
-    "comment": "",
+    "comment": "should be a primary care visit and not emerg",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   },
   {
-    "id": "ENTRY-1786153013448-5673",
-    "timestamp": "2026-08-08T01:36:53.448Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-359109",
-    "doctorName": "sam",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786153015194-8609",
-    "timestamp": "2026-08-08T01:36:55.194Z",
-    "type": "exit_survey",
-    "rating": null,
+    "id": "ENTRY-1786333640315-8362",
+    "timestamp": "2026-08-10T03:47:20.315Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100020",
+    "rating": 3,
+    "accessRating": 4,
+    "completenessRating": 3,
     "helpful": null,
     "helpedDecide": null,
     "visitType": null,
@@ -434,29 +1441,13 @@
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   },
   {
-    "id": "ENTRY-1786153046983-299",
-    "timestamp": "2026-08-08T01:37:26.983Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-869865",
-    "doctorName": "sam",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786153440073-2981",
-    "timestamp": "2026-08-08T01:44:00.073Z",
-    "type": "exit_survey",
-    "rating": null,
+    "id": "ENTRY-1786333698551-3208",
+    "timestamp": "2026-08-10T03:48:18.551Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100019",
+    "rating": 5,
+    "accessRating": 5,
+    "completenessRating": 5,
     "helpful": null,
     "helpedDecide": null,
     "visitType": null,
@@ -465,62 +1456,427 @@
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   },
   {
-    "id": "ENTRY-1786154517085-6907",
-    "timestamp": "2026-08-08T02:01:57.085Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-358016",
-    "doctorName": "grda",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
+    "id": "ENTRY-1786333812627-2109",
+    "timestamp": "2026-08-10T03:50:12.627Z",
+    "updatedAt": "2026-08-10T03:50:12.627Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-130113",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "abdominal_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "abd_swollen_hard"
+      ],
+      "selectedSecondarySymptoms": [
+        "abd_cramping"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Swollen, Hard, or Rigid Abdomen) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "abd_swollen_hard"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for abdominal pain. Seek emergency care immediately."
+    },
+    "emailDetails": {
+      "doctorName": "fds",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-10T03:50:15.889Z"
+    }
   },
   {
-    "id": "ENTRY-1786154519853-4100",
-    "timestamp": "2026-08-08T02:01:59.853Z",
+    "id": "ENTRY-1786334006872-337",
+    "timestamp": "2026-08-10T03:53:26.872Z",
+    "updatedAt": "2026-08-10T03:53:26.872Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-285125",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "abdominal_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "abd_swollen_hard",
+        "abd_lethargy"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Swollen, Hard, or Rigid Abdomen, Lethargy or Extreme Weakness) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "abd_swollen_hard",
+        "abd_lethargy"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for abdominal pain. Seek emergency care immediately."
+    },
+    "emailDetails": {
+      "doctorName": "fdsa",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-10T03:53:43.984Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786334229899-4393",
+    "timestamp": "2026-08-10T03:57:09.899Z",
+    "updatedAt": "2026-08-10T03:57:09.899Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-172642",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "hypertension",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "ht_dyspnea",
+        "ht_seizure_confusion",
+        "ht_neurological",
+        "ht_headache",
+        "ht_vision"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Shortness of Breath or Chest Pain, Seizures or Sudden Confusion, Numbness, Weakness, or Slurred Speech, Sudden, Severe Headache, Vision Changes) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "ht_dyspnea",
+        "ht_seizure_confusion",
+        "ht_neurological",
+        "ht_headache",
+        "ht_vision"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for hypertension. Seek emergency care immediately."
+    }
+  },
+  {
+    "id": "ENTRY-1786334267988-2351",
+    "timestamp": "2026-08-10T03:57:47.988Z",
+    "updatedAt": "2026-08-10T03:57:47.988Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-595348",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "chest_breathing",
+        "chest_crushing",
+        "chest_palpitations",
+        "chest_spread",
+        "chest_syncope"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Breathing Difficulty / Shortness of Breath, Crushing or Squeezing Chest Pain, Racing or Skipping Heartbeat, Pain Spreading to Arm, Neck, or Back, Fainting, Dizziness, or Lightheadedness) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "chest_breathing",
+        "chest_crushing",
+        "chest_palpitations",
+        "chest_spread",
+        "chest_syncope"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for chest pain. Seek emergency care immediately."
+    }
+  },
+  {
+    "id": "ENTRY-1786334292697-4411",
+    "timestamp": "2026-08-10T03:58:12.697Z",
+    "updatedAt": "2026-08-10T03:58:12.697Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-947760",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "sti_mild_swelling"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Bruising and localized swelling) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for soft tissue_injury."
+    }
+  },
+  {
+    "id": "ENTRY-1786334371028-3319",
+    "timestamp": "2026-08-10T03:59:31.028Z",
+    "updatedAt": "2026-08-10T03:59:31.028Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-305037",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "sti_mild_swelling"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Bruising and localized swelling) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for soft tissue_injury."
+    }
+  },
+  {
+    "id": "ENTRY-1786336007199-6896",
+    "timestamp": "2026-08-10T04:26:47.199Z",
+    "updatedAt": "2026-08-10T04:26:47.199Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-519850",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "head_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
+  },
+  {
+    "id": "ENTRY-1786336026245-2613",
+    "timestamp": "2026-08-10T04:27:06.245Z",
+    "updatedAt": "2026-08-10T04:27:06.245Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-166264",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "M5G 1X8"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    },
+    "emailDetails": {
+      "doctorName": "fda",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-10T04:27:19.842Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786336041479-3831",
+    "timestamp": "2026-08-10T04:27:21.479Z",
     "type": "exit_survey",
+    "refId": "PEDS-TRG-166264",
     "rating": null,
-    "helpful": null,
-    "helpedDecide": "yes",
-    "visitType": null,
-    "selectedTags": [],
-    "comment": "",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
-  },
-  {
-    "id": "ENTRY-1786154789936-738",
-    "timestamp": "2026-08-08T02:06:29.936Z",
-    "type": "pcp_referral_email",
-    "refId": "PCP-REF-461527",
-    "doctorName": "fds",
-    "doctorEmail": "kongenoch@gmail.com",
-    "childName": "Enoch MING LOK KONG",
-    "triageTitle": "Immediate Emergency Care Recommended",
-    "triageCategory": "HIGH_EMERGENCY",
-    "actionPlan": [
-      "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
-      "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
-      "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
-      "Bring health insurance card, photo ID, and any current medication bottles."
-    ],
-    "message": "Pediatric Triage PCP Referral Copy sent to patient email",
-    "copySelf": true
-  },
-  {
-    "id": "ENTRY-1786154791399-9655",
-    "timestamp": "2026-08-08T02:06:31.399Z",
-    "type": "exit_survey",
-    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
     "helpful": null,
     "helpedDecide": null,
+    "skipped": true,
     "visitType": null,
     "selectedTags": [],
     "comment": "",

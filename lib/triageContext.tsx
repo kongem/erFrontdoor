@@ -64,6 +64,7 @@ export interface SymptomInfo {
 }
 
 export interface TriageState {
+  refId: string;
   step: number; // 1: Guardian, 2: Child, 3: Symptoms, 4: Result
   guardian: GuardianInfo;
   child: ChildInfo;
@@ -135,13 +136,14 @@ const LOCAL_STORAGE_KEY = 'pediatric_er_triage_v1';
 
 export function TriageProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<TriageState>({
+    refId: '',
     step: 1,
     guardian: DEFAULT_GUARDIAN,
     child: DEFAULT_CHILD,
     symptoms: DEFAULT_SYMPTOMS,
     result: DEFAULT_RESULT,
     nearestFacilities: findNearestFacilities(DEFAULT_GUARDIAN.postalCode, DEFAULT_RESULT.category),
-    isHydrated: true,
+    isHydrated: false, // Hydrated dynamically on mount
   });
 
   // Load state from localStorage on mount (Hydration safety)
@@ -150,6 +152,7 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
+        const refId = parsed.refId || `PEDS-TRG-${Math.floor(100000 + Math.random() * 900000)}`;
         const guardian = { ...DEFAULT_GUARDIAN, ...(parsed.guardian || {}) };
         const child = { ...DEFAULT_CHILD, ...(parsed.child || {}) };
         const symptoms = { ...DEFAULT_SYMPTOMS, ...(parsed.symptoms || {}) };
@@ -160,6 +163,7 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
         setState((prev) => ({
           ...prev,
           ...parsed,
+          refId,
           guardian,
           child,
           symptoms,
@@ -167,11 +171,13 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
           isHydrated: true,
         }));
       } else {
-        setState((prev) => ({ ...prev, isHydrated: true }));
+        const refId = `PEDS-TRG-${Math.floor(100000 + Math.random() * 900000)}`;
+        setState((prev) => ({ ...prev, refId, isHydrated: true }));
       }
     } catch (e) {
       console.warn('Failed to load triage state from localStorage:', e);
-      setState((prev) => ({ ...prev, isHydrated: true }));
+      const refId = `PEDS-TRG-${Math.floor(100000 + Math.random() * 900000)}`;
+      setState((prev) => ({ ...prev, refId, isHydrated: true }));
     }
   }, []);
 
@@ -180,6 +186,7 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
     if (!state.isHydrated) return;
     try {
       const stateToSave = {
+        refId: state.refId,
         step: state.step,
         guardian: state.guardian,
         child: state.child,
@@ -191,7 +198,7 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.warn('Failed to persist triage state to localStorage:', e);
     }
-  }, [state.step, state.guardian, state.child, state.symptoms, state.result, state.nearestFacilities, state.isHydrated]);
+  }, [state.refId, state.step, state.guardian, state.child, state.symptoms, state.result, state.nearestFacilities, state.isHydrated]);
 
   const setStep = (step: number) => {
     setState((prev) => ({ ...prev, step }));
@@ -244,11 +251,27 @@ export function TriageProvider({ children }: { children: React.ReactNode }) {
       step: 4, // Navigate to Result step
     }));
 
+    // Auto-log case to data/feedback.json store
+    fetch('/api/triage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        refId: state.refId,
+        child: state.child,
+        guardian: state.guardian,
+        symptoms: state.symptoms,
+        result: evaluationResult,
+      }),
+    }).catch((err) => {
+      console.warn('Failed to log triage case to storage:', err);
+    });
+
     return evaluationResult;
   };
 
   const resetTriage = () => {
     setState({
+      refId: `PEDS-TRG-${Math.floor(100000 + Math.random() * 900000)}`,
       step: 1,
       guardian: DEFAULT_GUARDIAN,
       child: DEFAULT_CHILD,

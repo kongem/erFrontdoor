@@ -524,7 +524,6 @@ export default function TriageWizardPage() {
                     <option value="fever">Fever / Body Temperature</option>
                     <option value="chest_pain">Chest Pain / Chest Discomfort</option>
                     <option value="abdominal_pain">Abdominal Pain / Stomach Pain</option>
-                    <option value="hypertension">High Blood Pressure / Hypertension</option>
                     <option value="soft_tissue_injury">Soft Tissue Injury (Bruises, Sprains, Strains)</option>
                     <option value="head_injury">Head Injury and Concussion</option>
                   </select>
@@ -725,10 +724,15 @@ export default function TriageWizardPage() {
               }`}>
               <div className="space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className={`px-3 py-1 rounded-full text-xs font-extrabold ${result.badgeBg}`}>
-                    {result.badgeText}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-300">
+                  <div className="flex items-center gap-2">
+                    <span className={`px-3 py-1 rounded-full text-xs font-extrabold ${result.badgeBg}`}>
+                      {result.badgeText}
+                    </span>
+                    <span className="text-xs text-slate-350 font-bold bg-white/10 px-3 py-1 rounded-full">
+                      Ref: {state.refId}
+                    </span>
+                  </div>
+                  <span className="text-xs font-semibold text-slate-350">
                     Recommended Facility: {result.recommendedFacilityType}
                   </span>
                 </div>
@@ -841,6 +845,7 @@ export default function TriageWizardPage() {
               isOpen={printModalOpen}
               onClose={() => setPrintModalOpen(false)}
               onEmailSent={() => setExitModalOpen(true)}
+              refId={state.refId}
               guardian={guardian}
               child={child}
               symptoms={symptoms}
@@ -851,6 +856,7 @@ export default function TriageWizardPage() {
             <ExitFeedbackModal
               isOpen={exitModalOpen}
               onClose={handleExitFeedbackClose}
+              refId={state.refId}
             />
           </motion.div>
         )}

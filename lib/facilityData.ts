@@ -264,6 +264,111 @@ export const ONTARIO_URGENT_CARE_CLINICS: PediatricFacility[] = [
     coordinates: { latitude: 45.3854, longitude: -75.6321 },
     websiteUrl: 'https://www.ottawapedsurgentcare.ca',
   },
+  {
+    id: 'hamilton_peds_uc',
+    name: 'Hamilton Pediatric Urgent Care Clinic',
+    shortName: 'Hamilton UC',
+    city: 'Hamilton',
+    address: '120 King Street West, Hamilton, ON',
+    postalCode: 'L8P 1A4',
+    fsaPrefix: 'L8P',
+    phone: '(905) 522-4321',
+    emergencyPhone: '(905) 522-4321',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 30,
+    is247: false,
+    capabilities: [
+      'Minor Illness Assessment',
+      'Sprains & Fracture Management',
+      'Mild Respiratory Therapy',
+    ],
+    coordinates: { latitude: 43.2557, longitude: -79.8711 },
+    websiteUrl: 'https://www.hamiltonpedsurgentcare.ca',
+  },
+  {
+    id: 'london_peds_uc',
+    name: "London Children's Urgent Care Clinic",
+    shortName: 'London UC',
+    city: 'London',
+    address: '750 Richmond Street, London, ON',
+    postalCode: 'N6A 3H2',
+    fsaPrefix: 'N6A',
+    phone: '(519) 672-8890',
+    emergencyPhone: '(519) 672-8890',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 22,
+    is247: false,
+    capabilities: [
+      'Pediatric Injury Assessment',
+      'Fever & Mild Dehydration Care',
+      'Ear & Throat Infection Diagnostics',
+    ],
+    coordinates: { latitude: 42.9592, longitude: -81.2255 },
+    websiteUrl: 'https://www.londonchildrensurgentcare.ca',
+  },
+  {
+    id: 'north_york_peds_uc',
+    name: 'North York Kids Urgent Care Clinic',
+    shortName: 'North York Kids UC',
+    city: 'North York',
+    address: '2901 Bayview Avenue, North York, ON',
+    postalCode: 'M2K 1E6',
+    fsaPrefix: 'M2K',
+    phone: '(416) 222-7788',
+    emergencyPhone: '(416) 222-7788',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 18,
+    is247: false,
+    capabilities: [
+      'Rapid Infection Testing',
+      'Laceration & Wound Care',
+      'Allergy & Asthmatic Management',
+    ],
+    coordinates: { latitude: 43.7694, longitude: -79.3638 },
+    websiteUrl: 'https://www.northyorkkidsurgentcare.ca',
+  },
+  {
+    id: 'markham_peds_uc',
+    name: 'Markham Pediatric Urgent Clinic',
+    shortName: 'Markham UC',
+    city: 'Markham',
+    address: '5000 Highway 7, Markham, ON',
+    postalCode: 'L3P 7H5',
+    fsaPrefix: 'L3P',
+    phone: '(905) 471-2233',
+    emergencyPhone: '(905) 471-2233',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 12,
+    is247: false,
+    capabilities: [
+      'Pediatric Walk-in Clinic',
+      'Mild Pain & Fever Care',
+      'Suture Removal & Splinting',
+    ],
+    coordinates: { latitude: 43.8821, longitude: -79.2483 },
+    websiteUrl: 'https://www.markhampediatricurgent.ca',
+  },
+  {
+    id: 'richmond_hill_peds_uc',
+    name: 'Richmond Hill Kids Urgent Care',
+    shortName: 'Richmond Hill UC',
+    city: 'Richmond Hill',
+    address: '9350 Yonge Street, Richmond Hill, ON',
+    postalCode: 'L4B 1A5',
+    fsaPrefix: 'L4B',
+    phone: '(905) 884-3322',
+    emergencyPhone: '(905) 884-3322',
+    pediatricLevel: 'Pediatric Emergency & Urgent Care',
+    waitTimeMinutes: 20,
+    is247: false,
+    capabilities: [
+      'Minor Pediatric Illnesses',
+      'Ear, Nose & Throat Diagnostics',
+      'Wound & Splinting Care',
+    ],
+    coordinates: { latitude: 43.8491, longitude: -79.3875 },
+    websiteUrl: 'https://www.richmondhillkidsurgentcare.ca',
+  },
 ];
 
 /**
@@ -415,6 +520,19 @@ export function findNearestFacilities(
 
   // Sort by distance ascending
   listWithDistance.sort((a, b) => a.distanceKm - b.distanceKm);
+
+  if (category === 'HIGH_EMERGENCY') {
+    return listWithDistance.slice(0, 2);
+  } else if (category === 'MODERATE_URGENT_CARE') {
+    return listWithDistance.slice(0, 4);
+  }
+
+  // Fallback if category is not provided
+  if (facilitiesSource === ONTARIO_PEDIATRIC_FACILITIES) {
+    return listWithDistance.slice(0, 2);
+  } else if (facilitiesSource === ONTARIO_URGENT_CARE_CLINICS) {
+    return listWithDistance.slice(0, 4);
+  }
 
   return listWithDistance;
 }

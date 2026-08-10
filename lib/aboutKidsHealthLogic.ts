@@ -56,7 +56,7 @@ export const RED_FLAG_SYMPTOMS: RedFlagSymptom[] = [
   },
 ];
 
-export type PrimarySymptom = 'select' | 'fever' | 'chest_pain' | 'abdominal_pain' | 'hypertension' | 'soft_tissue_injury' | 'head_injury';
+export type PrimarySymptom = 'select' | 'fever' | 'chest_pain' | 'abdominal_pain' | 'soft_tissue_injury' | 'head_injury';
 
 export interface SymptomDefinition {
   id: string;
@@ -101,16 +101,6 @@ export const SYMPTOMS_BY_PRIMARY: Record<PrimarySymptom, SymptomDefinition[]> = 
     { id: 'abd_cramping', label: 'Mild Cramping or Bloating', description: 'Cramping pain that comes and goes, often relieved by passing gas.', isRedFlag: false },
     { id: 'abd_constipation', label: 'Related to Constipation', description: 'Child has not had a bowel movement in days or has hard stools.', isRedFlag: false },
     { id: 'abd_stress', label: 'Linked to Anxiety or Stress', description: 'Pain occurs mostly on school days or during stressful situations.', isRedFlag: false },
-  ],
-  hypertension: [
-    { id: 'ht_headache', label: 'Sudden, Severe Headache', description: 'Intense, throbbing headache that comes on suddenly.', isRedFlag: true },
-    { id: 'ht_vision', label: 'Vision Changes', description: 'Blurred vision, double vision, or temporary loss of vision.', isRedFlag: true },
-    { id: 'ht_dyspnea', label: 'Shortness of Breath or Chest Pain', description: 'Difficulty breathing or discomfort in the chest.', isRedFlag: true },
-    { id: 'ht_seizure_confusion', label: 'Seizures or Sudden Confusion', description: 'Seizure activity, twitching, or sudden disorientation.', isRedFlag: true },
-    { id: 'ht_neurological', label: 'Numbness, Weakness, or Slurred Speech', description: 'Facial droop, weakness on one side of body, or trouble talking.', isRedFlag: true },
-    { id: 'ht_mild_dizziness', label: 'Mild Dizziness without Other Symptoms', description: 'Feeling slightly lightheaded but otherwise acting normally.', isRedFlag: false },
-    { id: 'ht_flushed', label: 'Flushed Face or Warm Skin', description: 'Redness or warmth in face/skin without headache or pain.', isRedFlag: false },
-    { id: 'ht_known_high', label: 'Asymptomatic High Blood Pressure Reading', description: 'Elevated blood pressure measurement but child has zero symptoms.', isRedFlag: false },
   ],
   soft_tissue_injury: [
     { id: 'sti_deformed', label: 'Deformed Joint or Crooked Bone', description: 'Visibly crooked limb, suspected fracture or joint dislocation.', isRedFlag: true },
@@ -248,13 +238,6 @@ export function evaluatePediatricTriage(input: TriageInput): TriageEvaluationRes
       if (selectedSecondarySymptoms.includes('abd_cramping')) moderateReasons.push('Mild cramping belly pain');
       if (selectedSecondarySymptoms.includes('abd_constipation')) moderateReasons.push('Constipation related pain');
       if (selectedSecondarySymptoms.includes('abd_stress')) moderateReasons.push('Anxiety/stress related pain');
-    }
-  } else if (primarySymptom === 'hypertension') {
-    if (selectedSecondarySymptoms.includes('ht_known_high') || selectedSecondarySymptoms.includes('ht_flushed') || selectedSecondarySymptoms.includes('ht_mild_dizziness')) {
-      isModerate = true;
-      if (selectedSecondarySymptoms.includes('ht_known_high')) moderateReasons.push('Asymptomatic elevated blood pressure');
-      if (selectedSecondarySymptoms.includes('ht_flushed')) moderateReasons.push('Flushed face or warm skin');
-      if (selectedSecondarySymptoms.includes('ht_mild_dizziness')) moderateReasons.push('Mild dizziness');
     }
   } else if (primarySymptom === 'soft_tissue_injury') {
     if (selectedSecondarySymptoms.includes('sti_mild_swelling') || selectedSecondarySymptoms.includes('sti_partial_movement')) {

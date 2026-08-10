@@ -59,33 +59,26 @@ export default function RootLayout({
                 </div>
                 <div>
                   <span className="text-lg font-bold bg-gradient-to-r from-teal-700 via-teal-900 to-slate-900 bg-clip-text text-transparent block leading-tight">
-                    REVAMP<span className="text-teal-600 font-extrabold"> PedsER</span>
+                    REVAMP<span className="text-teal-600 font-extrabold"></span>
                   </span>
                   <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">
-                    Digital Front Door
+                    Pediatric Digital ER
                   </span>
                 </div>
               </Link>
 
-              {/* Navigation Links */}
               <nav className="hidden md:flex items-center gap-1">
                 <Link
-                  href="/"
+                  href="/staff"
                   className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition"
                 >
-                  Home
+                  Provider Portal
                 </Link>
                 <Link
-                  href="/#eligibility-guide"
+                  href="/feedback"
                   className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition"
                 >
-                  Care Level Guide
-                </Link>
-                <Link
-                  href="/#how-it-works"
-                  className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition"
-                >
-                  How Triage Works
+                  Patient Feedback
                 </Link>
                 <Link
                   href="/#faq"
@@ -95,17 +88,10 @@ export default function RootLayout({
                 </Link>
                 <Link
                   href="/support"
-                  className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition flex items-center gap-1"
+                  className="p-2 text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition flex items-center justify-center"
+                  title="Support"
                 >
-                  <HelpCircle className="w-4 h-4 text-teal-600" />
-                  Support
-                </Link>
-                <Link
-                  href="/feedback"
-                  className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition flex items-center gap-1"
-                >
-                  <MessageSquare className="w-4 h-4 text-teal-600" />
-                  Feedback
+                  <HelpCircle className="w-5 h-5 text-teal-600" />
                 </Link>
               </nav>
 

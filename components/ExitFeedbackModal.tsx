@@ -6,14 +6,24 @@ import { X, MessageSquare, CheckCircle2, HeartHandshake, Send } from 'lucide-rea
 interface ExitFeedbackModalProps {
   isOpen: boolean;
   onClose: () => void;
+  refId?: string;
 }
 
-export default function ExitFeedbackModal({ isOpen, onClose }: ExitFeedbackModalProps) {
+export default function ExitFeedbackModal({ isOpen, onClose, refId }: ExitFeedbackModalProps) {
   const [helped, setHelped] = useState<'yes' | 'no' | 'unsure' | null>(null);
   const [feedback, setFeedback] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [skipped, setSkipped] = useState(false);
 
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    setHelped(null);
+    setFeedback('');
+    setSubmitted(false);
+    setSkipped(false);
+    onClose();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +34,31 @@ export default function ExitFeedbackModal({ isOpen, onClose }: ExitFeedbackModal
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: 'exit_survey',
+          refId: refId || null,
+          skipped: false,
           helpedDecide: helped,
-          feedback,
+          comment: feedback,
         }),
       });
     } catch (err) {
       console.warn('Error saving exit feedback:', err);
+    }
+  };
+
+  const handleSkip = async () => {
+    setSkipped(true);
+    try {
+      await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'exit_survey',
+          refId: refId || null,
+          skipped: true,
+        }),
+      });
+    } catch (err) {
+      console.warn('Error saving skip feedback:', err);
     }
   };
 
@@ -46,7 +75,7 @@ export default function ExitFeedbackModal({ isOpen, onClose }: ExitFeedbackModal
             </h3>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition"
           >
             <X className="w-5 h-5" />
@@ -63,16 +92,33 @@ export default function ExitFeedbackModal({ isOpen, onClose }: ExitFeedbackModal
               Your feedback directly impacts how we improve pediatric emergency guidance for all families.
             </p>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="mt-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition"
             >
               Done & Close
             </button>
           </div>
+        ) : skipped ? (
+          <div className="text-center py-6 space-y-3">
+            <div className="w-12 h-12 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mx-auto border border-teal-150">
+              <HeartHandshake className="w-6 h-6" />
+            </div>
+            <h4 className="text-base font-bold text-slate-900">We Understand This Is a Stressful Situation</h4>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              We appreciate feedback when your child's medical concerns are fully addressed.
+              An email will be sent to you with a link to provide feedback at a later time when you are ready.
+            </p>
+            <button
+              onClick={handleClose}
+              className="mt-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-6 py-2.5 rounded-xl transition"
+            >
+              Close
+            </button>
+          </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="text-xs text-slate-600">
-              Your summary has been generated and sent. Please take 30 seconds to let us know about your experience using LittleCare.
+              Your summary has been generated and sent. Please take 30 seconds to let us know about your experience using REVAMP.
             </p>
 
             <p className="text-xs font-semibold text-slate-700">
@@ -115,7 +161,7 @@ export default function ExitFeedbackModal({ isOpen, onClose }: ExitFeedbackModal
             <div className="pt-2 flex justify-end gap-3 border-t border-slate-100">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleSkip}
                 className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition"
               >
                 Skip

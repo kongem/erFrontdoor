@@ -35,7 +35,7 @@ import {
 const CARE_LEVELS = [
   {
     id: 'er',
-    title: 'Pediatric Emergency Room',
+    title: 'Emergency Room',
     subtitle: 'Immediate Specialized Care',
     badge: 'Immediate Action',
     badgeBg: 'bg-rose-100 text-rose-800 border-rose-200',
@@ -283,7 +283,7 @@ export default function LandingPage() {
             Where Should You Take Your Child?
           </h2>
           <p className="text-slate-600 text-base sm:text-lg">
-            Understand the difference between Pediatric Emergency Rooms, Urgent Care, and Primary Care before you travel.
+            Understand the difference between Emergency Rooms, Urgent Care, and Primary Care before you travel.
           </p>
         </div>
 
@@ -672,23 +672,35 @@ export default function LandingPage() {
               <ul className="space-y-2 text-xs text-slate-400">
                 <li><Link href="/" className="hover:text-teal-400 transition">Landing Page</Link></li>
                 <li><Link href="/#eligibility-guide" className="hover:text-teal-400 transition">Care Level Guide</Link></li>
-                <li><Link href="/#how-it-works" className="hover:text-teal-400 transition">How Triage Works</Link></li>
-                <li><Link href="/#faq" className="hover:text-teal-400 transition">FAQ Accordion</Link></li>
-                <li><Link href="/support" className="hover:text-teal-400 transition">Support Request Form</Link></li>
+                <li><Link href="/#how-it-works" className="hover:text-teal-400 transition">How REVAMP Works</Link></li>
+                <li><Link href="/staff" className="hover:text-teal-400 transition">Staff Portal</Link></li>
                 <li><Link href="/feedback" className="hover:text-teal-400 transition">Patient Feedback</Link></li>
+                <li><Link href="/#faq" className="hover:text-teal-400 transition">FAQ</Link></li>
+                <li><Link href="/support" className="hover:text-teal-400 transition">Support</Link></li>
               </ul>
             </div>
 
             {/* Emergency Contacts */}
-            <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-100">
-                Emergency Hotlines
-              </h4>
-              <ul className="space-y-2 text-xs text-slate-400">
-                <li className="text-rose-400 font-bold">Emergency Services: 911</li>
-                <li>Poison Help 1-844-764-7669</li>
-                <li>Kids Help Phone 1-800-668-6868</li>
-              </ul>
+            <div className="space-y-4">
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-100">
+                  Emergency Hotlines
+                </h4>
+                <ul className="space-y-2 text-xs text-slate-400">
+                  <li className="text-rose-400 font-bold">Emergency Services: 911</li>
+                  <li>Poison Help 1-844-764-7669</li>
+                  <li>Kids Help Phone 1-800-668-6868</li>
+                </ul>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-100">
+                  Vendor Tools
+                </h4>
+                <ul className="space-y-2 text-xs text-slate-400">
+                  <li><Link href="/vendor" className="hover:text-teal-400 transition">Vendor Analytics Dashboard</Link></li>
+                </ul>
+              </div>
             </div>
 
             {/* Medical Disclaimer */}

@@ -15,6 +15,7 @@ interface PrintableSummaryModalProps {
   symptoms: SymptomInfo;
   result: TriageEvaluationResult;
   facility?: FacilityWithDistance;
+  refId: string;
 }
 
 export default function PrintableSummaryModal({
@@ -26,6 +27,7 @@ export default function PrintableSummaryModal({
   symptoms,
   result,
   facility,
+  refId,
 }: PrintableSummaryModalProps) {
   const registeredEmail = guardian?.email || child?.email || '';
   const [emailInput, setEmailInput] = useState(registeredEmail);
@@ -53,6 +55,7 @@ export default function PrintableSummaryModal({
           triageResult: result,
           message: 'Pediatric Triage PCP Referral Copy sent to patient email',
           copySelf: true,
+          refId,
         }),
       });
     } catch (e) {
@@ -112,7 +115,7 @@ export default function PrintableSummaryModal({
             </div>
             <div className="text-right text-xs text-slate-500 space-y-0.5">
               <p><strong>Assessment Date:</strong> {currentDateStr}</p>
-              <p><strong>Ref ID:</strong> PEDS-TRG-{Math.floor(100000 + Math.random() * 900000)}</p>
+              <p><strong>Ref ID:</strong> {refId}</p>
               <p><strong>Protocol:</strong> AboutKidsHealth Triage Rules</p>
             </div>
           </div>

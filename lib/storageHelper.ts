@@ -1,36 +1,17 @@
-import fs from 'fs/promises';
-import path from 'path';
-
-const DATA_FILE_PATH = path.join(process.cwd(), 'data', 'feedback.json');
+import {
+  insertLog,
+  saveOrUpdateTriageCaseLog,
+  markTriageEmailSentLog,
+} from './db';
 
 export async function appendToFeedbackStore(entry: Record<string, any>): Promise<void> {
-  try {
-    // Ensure data directory exists
-    const dir = path.dirname(DATA_FILE_PATH);
-    await fs.mkdir(dir, { recursive: true });
+  return insertLog(entry);
+}
 
-    let existingData: any[] = [];
-    try {
-      const fileContent = await fs.readFile(DATA_FILE_PATH, 'utf-8');
-      existingData = JSON.parse(fileContent);
-      if (!Array.isArray(existingData)) {
-        existingData = [];
-      }
-    } catch {
-      existingData = [];
-    }
+export async function saveOrUpdateTriageCase(refId: string, entry: Record<string, any>): Promise<void> {
+  return saveOrUpdateTriageCaseLog(refId, entry);
+}
 
-    const timestampedEntry = {
-      id: `ENTRY-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
-      timestamp: new Date().toISOString(),
-      ...entry,
-    };
-
-    existingData.push(timestampedEntry);
-
-    await fs.writeFile(DATA_FILE_PATH, JSON.stringify(existingData, null, 2), 'utf-8');
-  } catch (error) {
-    console.error('Error writing to feedback.json:', error);
-    throw error;
-  }
+export async function markTriageEmailSent(refId: string, emailDetails: { doctorName: string; doctorEmail: string }): Promise<void> {
+  return markTriageEmailSentLog(refId, emailDetails);
 }
