@@ -78,7 +78,7 @@ const DEFAULT_GUARDIAN: GuardianInfo = {
   name: '',
   email: '',
   phone: '',
-  postalCode: 'M5G 1X8',
+  postalCode: '',
   relationship: 'Parent',
 };
 
@@ -93,7 +93,7 @@ const DEFAULT_CHILD: ChildInfo = {
   address: '',
   city: 'Toronto',
   province: 'ON',
-  postalCode: 'M5G 1X8',
+  postalCode: '',
   phone: '',
   email: '',
   ageInMonths: 24, // 2 years default
@@ -132,7 +132,7 @@ interface TriageContextType {
 
 const TriageContext = createContext<TriageContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'pediatric_er_triage_v1';
+const LOCAL_STORAGE_KEY = 'pediatric_er_triage_v4';
 
 export function TriageProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<TriageState>({
