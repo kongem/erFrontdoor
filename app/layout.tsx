@@ -69,7 +69,7 @@ export default function RootLayout({
 
               <nav className="hidden md:flex items-center gap-1">
                 <Link
-                  href="/staff"
+                  href="/provider"
                   className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition"
                 >
                   Provider Portal

@@ -673,7 +673,7 @@ export default function LandingPage() {
                 <li><Link href="/" className="hover:text-teal-400 transition">Landing Page</Link></li>
                 <li><Link href="/#eligibility-guide" className="hover:text-teal-400 transition">Care Level Guide</Link></li>
                 <li><Link href="/#how-it-works" className="hover:text-teal-400 transition">How REVAMP Works</Link></li>
-                <li><Link href="/staff" className="hover:text-teal-400 transition">Staff Portal</Link></li>
+                <li><Link href="/provider" className="hover:text-teal-400 transition">Provider Portal</Link></li>
                 <li><Link href="/feedback" className="hover:text-teal-400 transition">Patient Feedback</Link></li>
                 <li><Link href="/#faq" className="hover:text-teal-400 transition">FAQ</Link></li>
                 <li><Link href="/support" className="hover:text-teal-400 transition">Support</Link></li>

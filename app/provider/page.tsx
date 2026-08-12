@@ -159,7 +159,7 @@ export default function StaffPortalPage() {
               <Stethoscope className="w-6 h-6 animate-pulse" />
             </div>
             <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-              Clinical Staff Portal
+              Provider Portal
             </h2>
             <p className="text-xs text-slate-500 max-w-xs mx-auto">
               Authorization required. Log in using your clinical credentials to review patient triage recommendations.

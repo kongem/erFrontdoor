@@ -2104,5 +2104,146 @@
     "selectedTags": [],
     "comment": "could be less clicks",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786504864493-4731",
+    "timestamp": "2026-08-12T03:21:04.493Z",
+    "updatedAt": "2026-08-12T03:21:04.493Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-244242",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L5N6P2"
+    },
+    "symptoms": {
+      "primarySymptom": "fever",
+      "hasFever": true,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 23,
+      "selectedRedFlags": [
+        "respiratory_distress",
+        "unresponsive_lethargy"
+      ],
+      "selectedSecondarySymptoms": [
+        "earache_severe"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Severe Breathing Trouble, Lethargy / Hard to Wake) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "respiratory_distress",
+        "unresponsive_lethargy"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for fever. Seek emergency care immediately."
+    }
+  },
+  {
+    "id": "ENTRY-1786505209983-1285",
+    "timestamp": "2026-08-12T03:26:49.983Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-244242",
+    "rating": 4,
+    "accessRating": 5,
+    "completenessRating": 4,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786505297943-9281",
+    "timestamp": "2026-08-12T03:28:17.943Z",
+    "updatedAt": "2026-08-12T03:28:17.943Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-906245",
+    "emailSent": true,
+    "child": {
+      "name": "Enoch Li",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L6C 2G8"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "chest_breathing"
+      ],
+      "selectedSecondarySymptoms": [
+        "chest_chronic"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Breathing Difficulty / Shortness of Breath) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "chest_breathing"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for chest pain. Seek emergency care immediately."
+    },
+    "emailDetails": {
+      "doctorName": "fds",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-12T03:28:29.760Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786505316333-6518",
+    "timestamp": "2026-08-12T03:28:36.333Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-906245",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": "yes",
+    "skipped": false,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "good triage",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   }
 ]

@@ -1,8 +1,8 @@
-// File: /Users/kongem/.gemini/antigravity/scratch/pediatric-er-frontdoor/app/staff/page.tsx
-import * as entry from '../../../../app/staff/page.js'
+// File: /Users/kongem/.gemini/antigravity/scratch/pediatric-er-frontdoor/app/feedback/page.tsx
+import * as entry from '../../../../app/feedback/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/staff/page.js')
+type TEntry = typeof import('../../../../app/feedback/page.js')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

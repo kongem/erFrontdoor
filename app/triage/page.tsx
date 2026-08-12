@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -48,8 +48,308 @@ export default function TriageWizardPage() {
     resetTriage,
   } = useTriage();
 
+  const { step, guardian, child, symptoms, result, nearestFacilities, isHydrated } = state;
+
   const [printModalOpen, setPrintModalOpen] = useState(false);
   const [exitModalOpen, setExitModalOpen] = useState(false);
+
+  // Chatbot State
+  const [messages, setMessages] = useState<any[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [currentStage, setCurrentStage] = useState<'ask_primary' | 'ask_fever_details' | 'ask_secondary' | 'ask_associated' | 'ask_additional' | 'complete'>('ask_primary');
+  const [localRedFlags, setLocalRedFlags] = useState<string[]>([]);
+  const [localSecondarySymptoms, setLocalSecondarySymptoms] = useState<string[]>([]);
+
+  // Local Fever values for the sliders
+  const [tempVal, setTempVal] = useState(38.5);
+  const [durationVal, setDurationVal] = useState(12);
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Helper to match input text to one of the 5 primary symptoms
+  const matchPrimarySymptom = (input: string): PrimarySymptom | null => {
+    const norm = input.toLowerCase().trim();
+    if (/fever|temp|hot|feever|feverish|warm/i.test(norm)) return 'fever';
+    if (/chest|heart|rib|cardiac|ches|chestpain/i.test(norm)) return 'chest_pain';
+    if (/stomach|belly|tummy|abd|abdom|gut|digest|gastric|ache/i.test(norm)) return 'abdominal_pain';
+    if (/soft|tissue|injury|sprain|strain|bruise|cut|wound|limb|scrape/i.test(norm)) return 'soft_tissue_injury';
+    if (/head|concussion|bump|brain|skull|hit|headache/i.test(norm)) return 'head_injury';
+    return null;
+  };
+
+  // Scroll to bottom of chat when messages change
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  // Reset chatbot when returning to Step 3
+  useEffect(() => {
+    if (step === 3) {
+      updateSymptoms({
+        primarySymptom: 'select',
+        hasFever: false,
+        feverTempCelsius: 38.5,
+        feverDurationHours: 12,
+        selectedRedFlags: [],
+        selectedSecondarySymptoms: [],
+        additionalNotes: '',
+      });
+      setCurrentStage('ask_primary');
+      setLocalRedFlags([]);
+      setLocalSecondarySymptoms([]);
+      setInputValue('');
+      setTempVal(38.5);
+      setDurationVal(12);
+
+      const childName = child.firstName || child.name || 'your child';
+      setMessages([
+        {
+          id: '1',
+          sender: 'bot',
+          text: `Hi! I am your clinical triage assistant. Let's assess your child's symptoms. What is **${childName}**'s primary concern?`,
+          timestamp: new Date(),
+        },
+      ]);
+    }
+  }, [step]);
+
+  // Ask secondary concerns stage helper
+  const askSecondaryConcerns = (prim: PrimarySymptom) => {
+    const childName = child.firstName || child.name || 'your child';
+    const definitions = SYMPTOMS_BY_PRIMARY[prim] || [];
+    const redFlags = definitions.filter((d) => d.isRedFlag);
+
+    if (redFlags.length > 0) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString() + '_bot',
+          sender: 'bot',
+          text: `Are there any secondary concerns? Please describe any of the following that apply to **${childName}**, and click the buttons below. Tap **Done** when finished.`,
+          timestamp: new Date(),
+          isSecondarySelector: true,
+        },
+      ]);
+      setCurrentStage('ask_secondary');
+    } else {
+      askAssociatedSymptoms(prim);
+    }
+  };
+
+  // Ask associated symptoms stage helper
+  const askAssociatedSymptoms = (prim: PrimarySymptom) => {
+    const childName = child.firstName || child.name || 'your child';
+    const definitions = SYMPTOMS_BY_PRIMARY[prim] || [];
+    const secondaries = definitions.filter((d) => !d.isRedFlag);
+
+    if (secondaries.length > 0) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString() + '_bot',
+          sender: 'bot',
+          text: `Are there any other associated symptoms? Select any that apply to **${childName}**, and click **Done** when finished.`,
+          timestamp: new Date(),
+          isAssociatedSelector: true,
+        },
+      ]);
+      setCurrentStage('ask_associated');
+    } else {
+      askAdditionalInfo();
+    }
+  };
+
+  // Ask additional details stage helper
+  const askAdditionalInfo = () => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now().toString() + '_bot',
+        sender: 'bot',
+        text: `Please tell us any other information including when the symptoms began, any medications given, or any specific concerns or other conditions that the child has. (You can type **"none"** if there is none.)`,
+        timestamp: new Date(),
+      },
+    ]);
+    setCurrentStage('ask_additional');
+  };
+
+  // Handle fever sliders submit
+  const handleFeverDetailsSubmit = (temp: number, duration: number) => {
+    updateSymptoms({
+      feverTempCelsius: temp,
+      feverDurationHours: duration,
+    });
+
+    const userMsgId = Date.now().toString();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: userMsgId,
+        sender: 'user' as const,
+        text: `Highest temperature is **${temp}°C**, lasting **${duration}** hours.`,
+        timestamp: new Date(),
+      },
+    ]);
+
+    setTimeout(() => {
+      askSecondaryConcerns('fever');
+    }, 600);
+  };
+
+  // Handle secondary red flags submit
+  const handleSecondaryDoneSubmit = (selectedFlags: string[]) => {
+    updateSymptoms({
+      selectedRedFlags: selectedFlags,
+    });
+
+    const currentPrimary = symptoms.primarySymptom || 'select';
+    const definitions = SYMPTOMS_BY_PRIMARY[currentPrimary] || [];
+    const selectedLabels = selectedFlags.map(
+      (id) => definitions.find((d) => d.id === id)?.label || id
+    );
+
+    const userMsgId = Date.now().toString();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: userMsgId,
+        sender: 'user' as const,
+        text: selectedLabels.length > 0 
+          ? `Secondary concerns selected: **${selectedLabels.join(', ')}**`
+          : 'No secondary concerns apply.',
+        timestamp: new Date(),
+      },
+    ]);
+
+    setTimeout(() => {
+      askAssociatedSymptoms(currentPrimary);
+    }, 600);
+  };
+
+  // Handle associated symptoms submit
+  const handleAssociatedDoneSubmit = (selectedSec: string[]) => {
+    updateSymptoms({
+      selectedSecondarySymptoms: selectedSec,
+    });
+
+    const currentPrimary = symptoms.primarySymptom || 'select';
+    const definitions = SYMPTOMS_BY_PRIMARY[currentPrimary] || [];
+    const selectedLabels = selectedSec.map(
+      (id) => definitions.find((d) => d.id === id)?.label || id
+    );
+
+    const userMsgId = Date.now().toString();
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: userMsgId,
+        sender: 'user' as const,
+        text: selectedLabels.length > 0 
+          ? `Associated symptoms selected: **${selectedLabels.join(', ')}**`
+          : 'No other associated symptoms apply.',
+        timestamp: new Date(),
+      },
+    ]);
+
+    setTimeout(() => {
+      askAdditionalInfo();
+    }, 600);
+  };
+
+  // Handle user sending text message
+  const handleSendMessage = (textToSend?: string) => {
+    const text = (textToSend || inputValue).trim();
+    if (!text) return;
+
+    const userMsgId = Date.now().toString();
+    const newUserMessage = {
+      id: userMsgId,
+      sender: 'user' as const,
+      text: text,
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, newUserMessage]);
+    setInputValue('');
+
+    setTimeout(() => {
+      processBotResponse(text);
+    }, 600);
+  };
+
+  // Process user's response in bot chat logic
+  const processBotResponse = (userInput: string) => {
+    const normalized = userInput.toLowerCase().trim();
+    const childName = child.firstName || child.name || 'your child';
+
+    if (currentStage === 'ask_primary') {
+      const matchedSymptom = matchPrimarySymptom(userInput);
+
+      if (matchedSymptom) {
+        updateSymptoms({
+          primarySymptom: matchedSymptom,
+          hasFever: matchedSymptom === 'fever',
+        });
+
+        let displayPrimaryName = '';
+        switch (matchedSymptom) {
+          case 'fever': displayPrimaryName = 'Fever'; break;
+          case 'chest_pain': displayPrimaryName = 'Chest Pain / Discomfort'; break;
+          case 'abdominal_pain': displayPrimaryName = 'Abdominal Pain / Stomach Pain'; break;
+          case 'soft_tissue_injury': displayPrimaryName = 'Soft Tissue Injury'; break;
+          case 'head_injury': displayPrimaryName = 'Head Injury / Concussion'; break;
+        }
+
+        const successMsg = `Understood. We will triage for primary concern: **${displayPrimaryName}**.`;
+
+        if (matchedSymptom === 'fever') {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now().toString() + '_bot',
+              sender: 'bot',
+              text: `${successMsg} Since **${childName}** has a fever, please specify the highest measured temperature and duration below:`,
+              timestamp: new Date(),
+              isFeverDetailsSelector: true,
+            },
+          ]);
+          setCurrentStage('ask_fever_details');
+        } else {
+          askSecondaryConcerns(matchedSymptom);
+        }
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString() + '_bot',
+            sender: 'bot',
+            text: 'We cannot triage that symptom at the moment, please try another.',
+            timestamp: new Date(),
+          },
+        ]);
+      }
+    } else if (currentStage === 'ask_additional') {
+      updateSymptoms({ additionalNotes: userInput });
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString() + '_bot',
+          sender: 'bot',
+          text: 'Thank you. Evaluating your care guidance now...',
+          timestamp: new Date(),
+        },
+      ]);
+
+      setTimeout(() => {
+        evaluateAndSave();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 800);
+    }
+  };
 
   const router = useRouter();
 
@@ -64,7 +364,7 @@ export default function TriageWizardPage() {
     router.push('/');
   };
 
-  const { step, guardian, child, symptoms, result, nearestFacilities, isHydrated } = state;
+
 
   if (!isHydrated) {
     return (
@@ -476,219 +776,295 @@ export default function TriageWizardPage() {
           <motion.div
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card-soft space-y-8"
+            className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card-soft space-y-6 flex flex-col"
           >
-            <div className="space-y-2">
-
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                What is {child.name || 'your child'}'s primary concern?
+            {/* Header */}
+            <div className="space-y-2 border-b border-slate-100 pb-4">
+              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1 rounded-full text-xs font-semibold">
+                <Activity className="w-3.5 h-3.5 text-teal-600 animate-pulse" />
+                <span>AI Clinical Assistant</span>
+              </div>
+              <h2 className="text-2xl font-extrabold text-slate-900">
+                Symptom Assessment Chat
               </h2>
+              <p className="text-xs text-slate-500">
+                Please chat with our assistant to describe {child.firstName || child.name || 'your child'}'s primary concern and any other observations.
+              </p>
             </div>
-            <form onSubmit={handleSymptomSubmit} className="space-y-8">
-              {/* PRIMARY SYMPTOM DROPDOWN */}
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-teal-800 mb-2">
-                    Select Primary Concern *
-                  </label>
-                  <select
-                    value={symptoms.primarySymptom || 'select'}
-                    onChange={(e) => {
-                      const prim = e.target.value as PrimarySymptom;
-                      updateSymptoms({
-                        primarySymptom: prim,
-                        selectedRedFlags: [],
-                        selectedSecondarySymptoms: [],
-                        hasFever: prim === 'fever',
-                      });
-                    }}
-                    className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white shadow-2xs"
-                  >
-                    <option value="select">Select...</option>
-                    <option value="fever">Fever / Body Temperature</option>
-                    <option value="chest_pain">Chest Pain / Chest Discomfort</option>
-                    <option value="abdominal_pain">Abdominal Pain / Stomach Pain</option>
-                    <option value="soft_tissue_injury">Soft Tissue Injury (Bruises, Sprains, Strains)</option>
-                    <option value="head_injury">Head Injury and Concussion</option>
-                  </select>
-                </div>
 
-                {symptoms.primarySymptom === 'fever' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-slate-100">
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                        Highest Measured Temp: {symptoms.feverTempCelsius}°C / {(symptoms.feverTempCelsius * 9 / 5 + 32).toFixed(1)}°F
-                      </label>
-                      <input
-                        type="range"
-                        min="36.5"
-                        max="41.5"
-                        step="0.1"
-                        value={symptoms.feverTempCelsius}
-                        onChange={(e) => updateSymptoms({ feverTempCelsius: parseFloat(e.target.value) })}
-                        className="w-full accent-teal-600"
-                      />
-                    </div>
+            {/* Chat Messages Container */}
+            <div 
+              ref={chatContainerRef}
+              className="h-[450px] overflow-y-auto border border-slate-150 rounded-2xl p-4 bg-slate-50/50 space-y-4"
+            >
+              {messages.map((msg, index) => {
+                const isBot = msg.sender === 'bot';
+                return (
+                  <div key={msg.id || index} className={`flex items-start gap-2.5 ${isBot ? 'justify-start' : 'justify-end'}`}>
+                    {isBot && (
+                      <div className="w-8 h-8 rounded-full bg-teal-100 border border-teal-250 flex items-center justify-center text-teal-700 flex-shrink-0 mt-0.5 shadow-2xs">
+                        <Activity className="w-4 h-4" />
+                      </div>
+                    )}
+                    <div className="space-y-2 max-w-[80%]">
+                      <div className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-card-soft ${
+                        isBot 
+                          ? 'bg-white border border-slate-150 text-slate-800 rounded-tl-none' 
+                          : 'bg-teal-600 text-white font-medium rounded-tr-none'
+                      }`}>
+                        <div dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                      </div>
+                      
+                      {/* Fever Sliders */}
+                      {isBot && msg.isFeverDetailsSelector && currentStage === 'ask_fever_details' && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-4 text-xs mt-2">
+                          <div className="space-y-2">
+                            <label className="block font-bold text-slate-700">
+                              Highest Measured Temp: <span className="text-teal-700 font-extrabold">{tempVal}°C</span> / <span className="text-slate-500">{(tempVal * 9 / 5 + 32).toFixed(1)}°F</span>
+                            </label>
+                            <input
+                              type="range"
+                              min="36.5"
+                              max="41.5"
+                              step="0.1"
+                              value={tempVal}
+                              onChange={(e) => setTempVal(parseFloat(e.target.value))}
+                              className="w-full accent-teal-600 cursor-pointer"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <label className="block font-bold text-slate-700">
+                              Fever Duration (Hours): <span className="text-teal-700 font-extrabold">{durationVal}h</span> <span className="text-slate-500">(~{(durationVal / 24).toFixed(1)} days)</span>
+                            </label>
+                            <input
+                              type="range"
+                              min="1"
+                              max="120"
+                              step="1"
+                              value={durationVal}
+                              onChange={(e) => setDurationVal(parseInt(e.target.value))}
+                              className="w-full accent-teal-600 cursor-pointer"
+                            />
+                          </div>
 
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-                        Fever Duration (Hours): {symptoms.feverDurationHours}h (~{(symptoms.feverDurationHours / 24).toFixed(1)} days)
-                      </label>
-                      <input
-                        type="range"
-                        min="1"
-                        max="120"
-                        step="1"
-                        value={symptoms.feverDurationHours}
-                        onChange={(e) => updateSymptoms({ feverDurationHours: parseInt(e.target.value) })}
-                        className="w-full accent-teal-600"
-                      />
+                          <button
+                            type="button"
+                            onClick={() => handleFeverDetailsSubmit(tempVal, durationVal)}
+                            className="w-full py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold transition shadow-xs text-xs"
+                          >
+                            Confirm Fever Details
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Secondary Concerns Red Flags Selector */}
+                      {isBot && msg.isSecondarySelector && currentStage === 'ask_secondary' && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3 mt-2">
+                          <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                            {(() => {
+                              const prim = symptoms.primarySymptom || 'select';
+                              const redFlags = (SYMPTOMS_BY_PRIMARY[prim] || []).filter((d) => d.isRedFlag);
+                              return redFlags.map((rf) => {
+                                const isChecked = localRedFlags.includes(rf.id);
+                                return (
+                                  <div
+                                    key={rf.id}
+                                    onClick={() => {
+                                      setLocalRedFlags(prev => 
+                                        prev.includes(rf.id) ? prev.filter(x => x !== rf.id) : [...prev, rf.id]
+                                      );
+                                    }}
+                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${
+                                      isChecked
+                                        ? 'bg-rose-50/55 border-rose-400 ring-1 ring-rose-400/20'
+                                        : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
+                                    }`}
+                                  >
+                                    <div className="flex items-start gap-2">
+                                      <input
+                                        type="checkbox"
+                                        checked={isChecked}
+                                        onChange={() => {}}
+                                        className="w-3.5 h-3.5 text-rose-600 rounded border-slate-300 mt-0.5 flex-shrink-0"
+                                      />
+                                      <div>
+                                        <span className="font-bold text-slate-800 block leading-tight">{rf.label}</span>
+                                        <span className="text-[10px] text-slate-500 block leading-relaxed mt-0.5">{rf.description}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              });
+                            })()}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleSecondaryDoneSubmit(localRedFlags)}
+                            className="w-full py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold transition shadow-xs text-xs"
+                          >
+                            Done
+                          </button>
+                        </div>
+                      )}
+
+                      {/* Associated Symptoms Selector */}
+                      {isBot && msg.isAssociatedSelector && currentStage === 'ask_associated' && (
+                        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-3 mt-2">
+                          <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
+                            {(() => {
+                              const prim = symptoms.primarySymptom || 'select';
+                              const secondaries = (SYMPTOMS_BY_PRIMARY[prim] || []).filter((d) => !d.isRedFlag);
+                              return secondaries.map((sec) => {
+                                const isChecked = localSecondarySymptoms.includes(sec.id);
+                                return (
+                                  <div
+                                    key={sec.id}
+                                    onClick={() => {
+                                      setLocalSecondarySymptoms(prev => 
+                                        prev.includes(sec.id) ? prev.filter(x => x !== sec.id) : [...prev, sec.id]
+                                      );
+                                    }}
+                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${
+                                      isChecked
+                                        ? 'bg-teal-55/10 border-teal-500 ring-1 ring-teal-500/20'
+                                        : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
+                                    }`}
+                                  >
+                                    <div className="flex items-start gap-2">
+                                      <input
+                                        type="checkbox"
+                                        checked={isChecked}
+                                        onChange={() => {}}
+                                        className="w-3.5 h-3.5 text-teal-600 rounded border-slate-300 mt-0.5 flex-shrink-0"
+                                      />
+                                      <div>
+                                        <span className="font-bold text-slate-800 block leading-tight">{sec.label}</span>
+                                        <span className="text-[10px] text-slate-500 block leading-relaxed mt-0.5">{sec.description}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                );
+                              });
+                            })()}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleAssociatedDoneSubmit(localSecondarySymptoms)}
+                            className="w-full py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-xl font-bold transition shadow-xs text-xs"
+                          >
+                            Done
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
-                )}
-              </div>
-
-              {/* DYNAMIC RED FLAG SYMPTOMS CARDS */}
-              {(() => {
-                const currentPrimary = symptoms.primarySymptom || 'select';
-                const definitions = SYMPTOMS_BY_PRIMARY[currentPrimary] || [];
-                const redFlags = definitions.filter((d) => d.isRedFlag);
-                const secondaries = definitions.filter((d) => !d.isRedFlag);
-
-                return (
-                  <>
-                    {currentPrimary === 'select' && (
-                      <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 text-center text-slate-500 font-semibold text-xs sm:text-sm flex flex-col items-center justify-center gap-3">
-                        <Stethoscope className="w-12 h-12 text-slate-350" />
-                        <p>Please select a primary concern from the dropdown menu above to begin the assessment.</p>
-                      </div>
-                    )}
-                    {redFlags.length > 0 && (
-                      <div className="space-y-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-rose-950 flex items-center gap-2 border-b border-rose-100 pb-1.5">
-                          <AlertTriangle className="w-4 h-4 text-rose-600" />
-                          Secondary Concerns (Select any that apply):
-                        </h3>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {redFlags.map((rf) => {
-                            const isChecked = symptoms.selectedRedFlags.includes(rf.id);
-                            return (
-                              <div
-                                key={rf.id}
-                                onClick={() => toggleRedFlag(rf.id)}
-                                className={`cursor-pointer p-4 rounded-2xl border transition-all ${isChecked
-                                  ? 'bg-rose-55/10 border-rose-500 ring-2 ring-rose-500/20 shadow-2xs'
-                                  : 'bg-white border-slate-200 hover:border-slate-300'
-                                  }`}
-                              >
-                                <div className="flex items-start gap-3">
-                                  <input
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={() => { }} // Handled by parent div click
-                                    className="w-4 h-4 text-rose-600 rounded border-slate-300 mt-1"
-                                  />
-                                  <div>
-                                    <span className="text-xs font-bold text-slate-900 block">
-                                      {rf.label}
-                                    </span>
-                                    <span className="text-[11px] text-slate-500 leading-relaxed block mt-0.5">
-                                      {rf.description}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* DYNAMIC SECONDARY/ASSOCIATED SYMPTOMS CARDS */}
-                    {secondaries.length > 0 && (
-                      <div className="space-y-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-teal-950 flex items-center gap-2 border-b border-teal-100 pb-1.5">
-                          <Stethoscope className="w-4 h-4 text-teal-600" />
-                          Other Associated Symptoms:
-                        </h3>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {secondaries.map((sec) => {
-                            const isChecked = symptoms.selectedSecondarySymptoms.includes(sec.id);
-                            return (
-                              <div
-                                key={sec.id}
-                                onClick={() => toggleSecondary(sec.id)}
-                                className={`cursor-pointer p-4 rounded-2xl border transition-all ${isChecked
-                                  ? 'bg-teal-55/10 border-teal-500 ring-2 ring-teal-500/20 shadow-2xs'
-                                  : 'bg-white border-slate-200 hover:border-slate-300'
-                                  }`}
-                              >
-                                <div className="flex items-start gap-3">
-                                  <input
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={() => { }} // Handled by parent div click
-                                    className="w-4 h-4 text-teal-600 rounded border-slate-300 mt-1"
-                                  />
-                                  <div>
-                                    <span className="text-xs font-bold text-slate-900 block">
-                                      {sec.label}
-                                    </span>
-                                    <span className="text-[11px] text-slate-500 leading-relaxed block mt-0.5">
-                                      {sec.description}
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-                  </>
                 );
-              })()}
+              })}
+              <div ref={messagesEndRef} />
+            </div>
 
-              {/* ADDITIONAL NOTES */}
-              <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                  Additional Parent Notes or Observations
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Describe when symptoms began, medications given, or specific concerns..."
-                  value={symptoms.additionalNotes}
-                  onChange={(e) => updateSymptoms({ additionalNotes: e.target.value })}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white"
-                />
+            {/* Suggested Chips for Primary Concern */}
+            {currentStage === 'ask_primary' && (
+              <div className="space-y-1.5 pt-1">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Suggested Concerns:</span>
+                <div className="flex flex-wrap gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputValue('Fever');
+                      handleSendMessage('Fever');
+                    }}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition"
+                  >
+                    Fever
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputValue('Chest Pain');
+                      handleSendMessage('Chest Pain');
+                    }}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition"
+                  >
+                    Chest Pain
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputValue('Stomach Pain');
+                      handleSendMessage('Stomach Pain');
+                    }}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition"
+                  >
+                    Stomach Pain
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputValue('Soft Tissue Injury');
+                      handleSendMessage('Soft Tissue Injury');
+                    }}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition"
+                  >
+                    Injury / Sprain
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputValue('Head Injury');
+                      handleSendMessage('Head Injury');
+                    }}
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-teal-50 hover:text-teal-700 hover:border-teal-300 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition"
+                  >
+                    Head Injury
+                  </button>
+                </div>
               </div>
+            )}
 
-              {/* BOTTOM ACTIONS */}
-              <div className="pt-4 flex items-center justify-between border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="px-6 py-3 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Back to Child Info</span>
-                </button>
+            {/* Input Form */}
+            <div className="flex gap-2 items-center pt-2">
+              <input
+                type="text"
+                disabled={currentStage === 'ask_fever_details' || currentStage === 'ask_secondary' || currentStage === 'ask_associated'}
+                placeholder={
+                  currentStage === 'ask_fever_details' || currentStage === 'ask_secondary' || currentStage === 'ask_associated'
+                    ? "Please select options above..."
+                    : currentStage === 'ask_additional'
+                    ? "Describe symptoms context (or type 'none')..."
+                    : "Type primary symptom (e.g. fever)..."
+                }
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSendMessage();
+                  }
+                }}
+                className="flex-grow px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
+              />
+              <button
+                type="button"
+                disabled={currentStage === 'ask_fever_details' || currentStage === 'ask_secondary' || currentStage === 'ask_associated' || !inputValue.trim()}
+                onClick={() => handleSendMessage()}
+                className="bg-teal-600 hover:bg-teal-700 disabled:bg-slate-200 text-white p-3.5 rounded-xl shadow-md disabled:shadow-none transition flex-shrink-0"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
 
-                <button
-                  type="submit"
-                  disabled={symptoms.primarySymptom === 'select'}
-                  className={`bg-gradient-to-r from-teal-600 to-teal-700 text-white font-extrabold text-sm px-8 py-3.5 rounded-xl shadow-lg shadow-teal-600/25 transition flex items-center gap-2 ${symptoms.primarySymptom === 'select'
-                    ? 'opacity-40 cursor-not-allowed'
-                    : 'hover:from-teal-700 hover:to-teal-800 hover:shadow-glow-teal'
-                    }`}
-                >
-                  <ShieldCheck className="w-5 h-5" />
-                  <span>Evaluate Care Guidance</span>
-                </button>
-              </div>
-            </form>
+            {/* Back Button */}
+            <div className="pt-4 flex items-center justify-between border-t border-slate-100 mt-2">
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="px-6 py-3 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center gap-1.5"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back to Child Info</span>
+              </button>
+            </div>
           </motion.div>
         )}
 

@@ -572,7 +572,7 @@ export default function VendorPortalPage() {
                     ) : (
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
-                          <tr className="bg-slate-550 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
+                          <tr className="bg-slate-50 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
                             <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('refId')}>
                               Reference ID {getSortIndicator(triageSort, 'refId')}
                             </th>
@@ -694,7 +694,7 @@ export default function VendorPortalPage() {
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
-                          <tr className="bg-slate-550 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
+                          <tr className="bg-slate-50 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
                             <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('refId')}>
                               Reference ID {getSortIndicator(providerSort, 'refId')}
                             </th>

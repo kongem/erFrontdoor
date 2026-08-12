@@ -229,7 +229,7 @@ export default function PrintableSummaryModal({
           {/* Signatures & Disclaimer */}
           <div className="pt-4 border-t border-slate-200 text-[11px] text-slate-400 space-y-2">
             <p>
-              <strong>Notice for Primary Care Provider:</strong> This assessment was generated via REVAMP PedsER Digital Front Door using AboutKidsHealth decision protocols. Please file this summary in the patient’s chart.
+              <strong>Notice for Primary Care Provider:</strong> This assessment was generated via REVAMP Digital Front Door using AboutKidsHealth decision protocols. Please visit https://er-frontdoor.vercel.app/provider to provide feedback.
             </p>
           </div>
         </div>
