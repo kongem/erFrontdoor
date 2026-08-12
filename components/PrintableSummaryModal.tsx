@@ -34,6 +34,11 @@ export default function PrintableSummaryModal({
   const [sending, setSending] = useState(false);
   const [sentSuccess, setSentSuccess] = useState(false);
 
+  const currentDateStr = new Date().toLocaleString('en-CA', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  });
+
   if (!isOpen) return null;
 
   const handleEmailToMe = async () => {
@@ -45,7 +50,7 @@ export default function PrintableSummaryModal({
 
     setSending(true);
     try {
-      await fetch('/api/email-pcp', {
+      const res = await fetch('/api/email-pcp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -56,8 +61,18 @@ export default function PrintableSummaryModal({
           message: 'Pediatric Triage PCP Referral Copy sent to patient email',
           copySelf: true,
           refId,
+          // Triage details for server rendering
+          guardian,
+          child,
+          symptoms,
+          facility,
         }),
       });
+
+      const responseData = await res.json();
+      if (responseData.success && responseData.previewUrl) {
+        console.log('Test Email Preview URL (Ethereal):', responseData.previewUrl);
+      }
     } catch (e) {
       console.warn('Failed to send triage summary email:', e);
     }
@@ -70,11 +85,6 @@ export default function PrintableSummaryModal({
       }, 400);
     }
   };
-
-  const currentDateStr = new Date().toLocaleString('en-CA', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  });
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
@@ -106,11 +116,11 @@ export default function PrintableSummaryModal({
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-teal-600 fill-current print:text-black" />
                 <span className="text-xl font-extrabold text-slate-900">
-                  REVAMP PedsER
+                  REVAMP Digital Triage
                 </span>
               </div>
               <p className="text-xs text-slate-500 font-semibold mt-1">
-                Digital Front Door • Clinical Assessment Summary
+                Clinical Assessment Summary
               </p>
             </div>
             <div className="text-right text-xs text-slate-500 space-y-0.5">

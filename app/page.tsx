@@ -676,7 +676,7 @@ export default function LandingPage() {
                 <li><Link href="/provider" className="hover:text-teal-400 transition">Provider Portal</Link></li>
                 <li><Link href="/feedback" className="hover:text-teal-400 transition">Patient Feedback</Link></li>
                 <li><Link href="/#faq" className="hover:text-teal-400 transition">FAQ</Link></li>
-                <li><Link href="/support" className="hover:text-teal-400 transition">Support</Link></li>
+
               </ul>
             </div>
 

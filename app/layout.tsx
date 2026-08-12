@@ -62,7 +62,7 @@ export default function RootLayout({
                     REVAMP<span className="text-teal-600 font-extrabold"></span>
                   </span>
                   <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">
-                    Pediatric Digital ER
+                    Pediatric Digital Frontdoor
                   </span>
                 </div>
               </Link>
@@ -86,13 +86,7 @@ export default function RootLayout({
                 >
                   FAQ
                 </Link>
-                <Link
-                  href="/support"
-                  className="p-2 text-slate-700 hover:text-teal-700 hover:bg-teal-50/60 rounded-lg transition flex items-center justify-center"
-                  title="Support"
-                >
-                  <HelpCircle className="w-5 h-5 text-teal-600" />
-                </Link>
+
               </nav>
 
 

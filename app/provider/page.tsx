@@ -248,7 +248,7 @@ export default function StaffPortalPage() {
               Triage Accuracy Verification
             </h1>
             <p className="text-sm text-slate-650 mt-1">
-              Physicians, Nurses, and NPs: Submit accuracy reviews and log diagnostic feedback for PedsER triage runs.
+              Physicians, Nurses and other providers: Submit accuracy reviews and log diagnostic feedback for REVAMP triage runs.
             </p>
           </div>
           <div className="flex items-center gap-2">

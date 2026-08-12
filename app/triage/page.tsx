@@ -438,9 +438,9 @@ export default function TriageWizardPage() {
           </div>
 
           <div className="grid grid-cols-4 gap-2 text-center text-[11px] font-semibold text-slate-500">
-            <span className={step >= 1 ? 'text-teal-700 font-bold' : ''}>1. Child/Guardian Profile</span>
+            <span className={step >= 1 ? 'text-teal-700 font-bold' : ''}>1. Child Profile</span>
             <span className={step >= 2 ? 'text-teal-700 font-bold' : ''}>2. Additional Info</span>
-            <span className={step >= 3 ? 'text-teal-700 font-bold' : ''}>3. Primary/Secondary Concerns</span>
+            <span className={step >= 3 ? 'text-teal-700 font-bold' : ''}>3. Symptom Assessment</span>
             <span className={step >= 4 ? 'text-teal-700 font-bold' : ''}>4. Care Guidance</span>
           </div>
         </div>
