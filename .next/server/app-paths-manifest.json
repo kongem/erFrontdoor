@@ -1,7 +1,7 @@
 {
-  "/vendor/page": "app/vendor/page.js",
-  "/triage/page": "app/triage/page.js",
-  "/feedback/page": "app/feedback/page.js",
+  "/api/feedback/route": "app/api/feedback/route.js",
   "/page": "app/page.js",
-  "/staff/page": "app/staff/page.js"
+  "/staff/page": "app/staff/page.js",
+  "/api/triage/route": "app/api/triage/route.js",
+  "/vendor/page": "app/vendor/page.js"
 }

@@ -695,25 +695,25 @@ export default function VendorPortalPage() {
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
                           <tr className="bg-slate-550 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
-                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('refId')}>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('refId')}>
                               Reference ID {getSortIndicator(providerSort, 'refId')}
                             </th>
-                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('timestamp')}>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('timestamp')}>
                               Date {getSortIndicator(providerSort, 'timestamp')}
                             </th>
-                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('rating')}>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('rating')}>
                               Accuracy {getSortIndicator(providerSort, 'rating')}
                             </th>
-                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('accessRating')}>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('accessRating')}>
                               Ease of Access {getSortIndicator(providerSort, 'accessRating')}
                             </th>
-                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('completenessRating')}>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition whitespace-nowrap" onClick={() => toggleProviderSort('completenessRating')}>
                               Completeness {getSortIndicator(providerSort, 'completenessRating')}
                             </th>
-                            <th className="p-4">
+                            <th className="p-4 whitespace-nowrap">
                               Clinical Comments
                             </th>
-                            <th className="p-4 text-right">Actions</th>
+                            <th className="p-4 text-right whitespace-nowrap">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-150">
