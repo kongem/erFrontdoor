@@ -101,7 +101,7 @@ export default function PrintableSummaryModal({
         {/* PRINTABLE DOCUMENT BODY */}
         <div className="space-y-6 text-slate-800 text-xs sm:text-sm overflow-y-auto pr-2 flex-grow min-h-0">
           {/* Document Header */}
-          <div className="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
+          <div className="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row sm:justify-between items-start gap-4">
             <div>
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-teal-600 fill-current print:text-black" />
@@ -139,7 +139,7 @@ export default function PrintableSummaryModal({
           </div>
 
           {/* Patient & Guardian Grid */}
-          <div className="grid grid-cols-2 gap-6 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-slate-50 p-4 rounded-2xl border border-slate-200">
             <div>
               <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 mb-2">
                 Patient (Child) Information
@@ -172,7 +172,7 @@ export default function PrintableSummaryModal({
             <h4 className="font-bold text-xs uppercase tracking-wider text-slate-500 border-b border-slate-200 pb-1">
               Reported Symptoms & Clinical Indicators
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
                 <span className="text-xs font-bold block text-slate-700">Primary Assessed Symptom:</span>
                 <span className="text-xs text-slate-600 capitalize">

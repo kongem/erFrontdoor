@@ -217,7 +217,7 @@ export default function TriageWizardPage() {
       {
         id: userMsgId,
         sender: 'user' as const,
-        text: selectedLabels.length > 0 
+        text: selectedLabels.length > 0
           ? `Secondary concerns selected: **${selectedLabels.join(', ')}**`
           : 'No secondary concerns apply.',
         timestamp: new Date(),
@@ -247,7 +247,7 @@ export default function TriageWizardPage() {
       {
         id: userMsgId,
         sender: 'user' as const,
-        text: selectedLabels.length > 0 
+        text: selectedLabels.length > 0
           ? `Associated symptoms selected: **${selectedLabels.join(', ')}**`
           : 'No other associated symptoms apply.',
         timestamp: new Date(),
@@ -713,7 +713,7 @@ export default function TriageWizardPage() {
                 Additional Clinical Information
               </h2>
               <p className="text-xs sm:text-sm text-slate-600">
-                Review registered demographics and add any optional weight or chronic condition details.
+                Review registered demographics and add an optional weight.
               </p>
             </div>
 
@@ -780,10 +780,7 @@ export default function TriageWizardPage() {
           >
             {/* Header */}
             <div className="space-y-2 border-b border-slate-100 pb-4">
-              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1 rounded-full text-xs font-semibold">
-                <Activity className="w-3.5 h-3.5 text-teal-600 animate-pulse" />
-                <span>AI Clinical Assistant</span>
-              </div>
+
               <h2 className="text-2xl font-extrabold text-slate-900">
                 Symptom Assessment Chat
               </h2>
@@ -793,7 +790,7 @@ export default function TriageWizardPage() {
             </div>
 
             {/* Chat Messages Container */}
-            <div 
+            <div
               ref={chatContainerRef}
               className="h-[450px] overflow-y-auto border border-slate-150 rounded-2xl p-4 bg-slate-50/50 space-y-4"
             >
@@ -807,14 +804,13 @@ export default function TriageWizardPage() {
                       </div>
                     )}
                     <div className="space-y-2 max-w-[80%]">
-                      <div className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-card-soft ${
-                        isBot 
-                          ? 'bg-white border border-slate-150 text-slate-800 rounded-tl-none' 
-                          : 'bg-teal-600 text-white font-medium rounded-tr-none'
-                      }`}>
+                      <div className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-card-soft ${isBot
+                        ? 'bg-white border border-slate-150 text-slate-800 rounded-tl-none'
+                        : 'bg-teal-600 text-white font-medium rounded-tr-none'
+                        }`}>
                         <div dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                       </div>
-                      
+
                       {/* Fever Sliders */}
                       {isBot && msg.isFeverDetailsSelector && currentStage === 'ask_fever_details' && (
                         <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-4 text-xs mt-2">
@@ -832,7 +828,7 @@ export default function TriageWizardPage() {
                               className="w-full accent-teal-600 cursor-pointer"
                             />
                           </div>
-                          
+
                           <div className="space-y-2">
                             <label className="block font-bold text-slate-700">
                               Fever Duration (Hours): <span className="text-teal-700 font-extrabold">{durationVal}h</span> <span className="text-slate-500">(~{(durationVal / 24).toFixed(1)} days)</span>
@@ -871,21 +867,20 @@ export default function TriageWizardPage() {
                                   <div
                                     key={rf.id}
                                     onClick={() => {
-                                      setLocalRedFlags(prev => 
+                                      setLocalRedFlags(prev =>
                                         prev.includes(rf.id) ? prev.filter(x => x !== rf.id) : [...prev, rf.id]
                                       );
                                     }}
-                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${
-                                      isChecked
-                                        ? 'bg-rose-50/55 border-rose-400 ring-1 ring-rose-400/20'
-                                        : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
-                                    }`}
+                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${isChecked
+                                      ? 'bg-rose-50/55 border-rose-400 ring-1 ring-rose-400/20'
+                                      : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
+                                      }`}
                                   >
                                     <div className="flex items-start gap-2">
                                       <input
                                         type="checkbox"
                                         checked={isChecked}
-                                        onChange={() => {}}
+                                        onChange={() => { }}
                                         className="w-3.5 h-3.5 text-rose-600 rounded border-slate-300 mt-0.5 flex-shrink-0"
                                       />
                                       <div>
@@ -921,21 +916,20 @@ export default function TriageWizardPage() {
                                   <div
                                     key={sec.id}
                                     onClick={() => {
-                                      setLocalSecondarySymptoms(prev => 
+                                      setLocalSecondarySymptoms(prev =>
                                         prev.includes(sec.id) ? prev.filter(x => x !== sec.id) : [...prev, sec.id]
                                       );
                                     }}
-                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${
-                                      isChecked
-                                        ? 'bg-teal-55/10 border-teal-500 ring-1 ring-teal-500/20'
-                                        : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
-                                    }`}
+                                    className={`cursor-pointer p-3 rounded-xl border text-[11px] transition ${isChecked
+                                      ? 'bg-teal-55/10 border-teal-500 ring-1 ring-teal-500/20'
+                                      : 'bg-slate-50 border-slate-150 hover:bg-slate-100/50'
+                                      }`}
                                   >
                                     <div className="flex items-start gap-2">
                                       <input
                                         type="checkbox"
                                         checked={isChecked}
-                                        onChange={() => {}}
+                                        onChange={() => { }}
                                         className="w-3.5 h-3.5 text-teal-600 rounded border-slate-300 mt-0.5 flex-shrink-0"
                                       />
                                       <div>
@@ -1032,8 +1026,8 @@ export default function TriageWizardPage() {
                   currentStage === 'ask_fever_details' || currentStage === 'ask_secondary' || currentStage === 'ask_associated'
                     ? "Please select options above..."
                     : currentStage === 'ask_additional'
-                    ? "Describe symptoms context (or type 'none')..."
-                    : "Type primary symptom (e.g. fever)..."
+                      ? "Describe symptoms context (or type 'none')..."
+                      : "Type primary symptom (e.g. fever)..."
                 }
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
