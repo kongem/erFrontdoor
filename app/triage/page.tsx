@@ -453,10 +453,6 @@ export default function TriageWizardPage() {
             className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-card-soft space-y-6"
           >
             <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 text-teal-800 px-3 py-1 rounded-full text-xs font-semibold">
-                <User className="w-3.5 h-3.5 text-teal-600" />
-                <span>Patient Registration & Demographics</span>
-              </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                 Patient & Guardian Details
               </h2>
