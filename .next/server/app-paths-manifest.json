@@ -1,13 +1,7 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/feedback/route": "app/api/feedback/route.js",
-  "/api/email-pcp/route": "app/api/email-pcp/route.js",
-  "/api/support/route": "app/api/support/route.js",
-  "/api/triage/route": "app/api/triage/route.js",
-  "/page": "app/page.js",
-  "/support/page": "app/support/page.js",
-  "/staff/page": "app/staff/page.js",
-  "/triage/page": "app/triage/page.js",
   "/vendor/page": "app/vendor/page.js",
-  "/feedback/page": "app/feedback/page.js"
+  "/triage/page": "app/triage/page.js",
+  "/feedback/page": "app/feedback/page.js",
+  "/page": "app/page.js",
+  "/staff/page": "app/staff/page.js"
 }

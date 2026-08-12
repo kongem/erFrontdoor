@@ -23,7 +23,8 @@ import {
   EyeOff,
   User,
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  Smile
 } from 'lucide-react';
 
 export default function VendorPortalPage() {
@@ -37,11 +38,53 @@ export default function VendorPortalPage() {
   // Dashboard State
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'metrics' | 'qualitative'>('metrics');
+  const [activeTab, setActiveTab] = useState<'metrics' | 'qualitative' | 'experience'>('metrics');
   const [selectedCase, setSelectedCase] = useState<any | null>(null);
 
   // FSA filtering state
   const [fsaSearch, setFsaSearch] = useState('');
+
+  // Sorting State
+  const [triageSort, setTriageSort] = useState<{ field: string; direction: 'asc' | 'desc' }>({
+    field: 'timestamp',
+    direction: 'desc',
+  });
+  const [providerSort, setProviderSort] = useState<{ field: string; direction: 'asc' | 'desc' }>({
+    field: 'timestamp',
+    direction: 'desc',
+  });
+  const [experienceSort, setExperienceSort] = useState<{ field: string; direction: 'asc' | 'desc' }>({
+    field: 'timestamp',
+    direction: 'desc',
+  });
+
+  const toggleTriageSort = (field: string) => {
+    setTriageSort((prev) => ({
+      field,
+      direction: prev.field === field && prev.direction === 'desc' ? 'asc' : 'desc',
+    }));
+  };
+
+  const toggleProviderSort = (field: string) => {
+    setProviderSort((prev) => ({
+      field,
+      direction: prev.field === field && prev.direction === 'desc' ? 'asc' : 'desc',
+    }));
+  };
+
+  const toggleExperienceSort = (field: string) => {
+    setExperienceSort((prev) => ({
+      field,
+      direction: prev.field === field && prev.direction === 'desc' ? 'asc' : 'desc',
+    }));
+  };
+
+  const getSortIndicator = (sortState: { field: string; direction: 'asc' | 'desc' }, field: string) => {
+    if (sortState.field !== field) return <span className="text-slate-300 ml-1 select-none">↕</span>;
+    return sortState.direction === 'asc'
+      ? <span className="text-indigo-600 ml-1 select-none font-extrabold">▲</span>
+      : <span className="text-indigo-600 ml-1 select-none font-extrabold">▼</span>;
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,6 +153,17 @@ export default function VendorPortalPage() {
       ).toFixed(1)
       : 'N/A';
 
+  const experienceFeedbacks = data.filter((x) => x.type === 'experience_feedback');
+  const avgExperienceRating =
+    experienceFeedbacks.length > 0
+      ? (
+        experienceFeedbacks.reduce((sum, item) => sum + (item.rating || 0), 0) /
+        experienceFeedbacks.length
+      ).toFixed(1)
+      : 'N/A';
+
+
+
   // Helper to link provider feedback to a specific triage case
   const getProviderFeedbackForCase = (refId: string) => {
     return providerFeedbacks.find((f) => f.refId === refId);
@@ -138,6 +192,128 @@ export default function VendorPortalPage() {
   const filteredTriageCases = triageCases.filter((c) => {
     const postal = c.guardian?.postalCode || '';
     return postal.toUpperCase().includes(fsaSearch.trim().toUpperCase());
+  });
+
+  // Sort Triage Cases
+  const sortedTriageCases = [...filteredTriageCases].sort((a, b) => {
+    let aVal: any = '';
+    let bVal: any = '';
+
+    switch (triageSort.field) {
+      case 'refId':
+        aVal = a.refId || '';
+        bVal = b.refId || '';
+        break;
+      case 'timestamp':
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+        break;
+      case 'age':
+        aVal = a.child?.ageInMonths ?? 0;
+        bVal = b.child?.ageInMonths ?? 0;
+        break;
+      case 'location':
+        aVal = (a.guardian?.postalCode || '').trim().substring(0, 3).toUpperCase();
+        bVal = (b.guardian?.postalCode || '').trim().substring(0, 3).toUpperCase();
+        break;
+      case 'category':
+        aVal = a.result?.category || '';
+        bVal = b.result?.category || '';
+        break;
+      case 'email':
+        aVal = a.emailSent ? 1 : 0;
+        bVal = b.emailSent ? 1 : 0;
+        break;
+      case 'audit':
+        aVal = providerFeedbacks.find((f) => f.refId === a.refId)?.rating ?? 0;
+        bVal = providerFeedbacks.find((f) => f.refId === b.refId)?.rating ?? 0;
+        break;
+      case 'feedback':
+        const patientFA = data.find((x) => x.type === 'exit_survey' && x.refId === a.refId);
+        const patientFB = data.find((x) => x.type === 'exit_survey' && x.refId === b.refId);
+        aVal = patientFA ? (patientFA.skipped ? 'skipped' : patientFA.helpedDecide || '') : '';
+        bVal = patientFB ? (patientFB.skipped ? 'skipped' : patientFB.helpedDecide || '') : '';
+        break;
+      default:
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+    }
+
+    if (aVal < bVal) return triageSort.direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return triageSort.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // Sort Provider Feedbacks
+  const sortedProviderFeedbacks = [...providerFeedbacks].sort((a, b) => {
+    let aVal: any = '';
+    let bVal: any = '';
+
+    switch (providerSort.field) {
+      case 'refId':
+        aVal = a.refId || '';
+        bVal = b.refId || '';
+        break;
+      case 'timestamp':
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+        break;
+      case 'rating':
+        aVal = a.rating ?? 0;
+        bVal = b.rating ?? 0;
+        break;
+      case 'accessRating':
+        aVal = a.accessRating ?? 0;
+        bVal = b.accessRating ?? 0;
+        break;
+      case 'completenessRating':
+        aVal = a.completenessRating ?? 0;
+        bVal = b.completenessRating ?? 0;
+        break;
+      case 'comment':
+        aVal = a.comment || '';
+        bVal = b.comment || '';
+        break;
+      default:
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+    }
+
+    if (aVal < bVal) return providerSort.direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return providerSort.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // Sort Experience Feedbacks
+  const sortedExperienceFeedbacks = [...experienceFeedbacks].sort((a, b) => {
+    let aVal: any = '';
+    let bVal: any = '';
+
+    switch (experienceSort.field) {
+      case 'timestamp':
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+        break;
+      case 'visitType':
+        aVal = a.visitType || '';
+        bVal = b.visitType || '';
+        break;
+      case 'rating':
+        aVal = a.rating ?? 0;
+        bVal = b.rating ?? 0;
+        break;
+      case 'comment':
+        aVal = a.comment || '';
+        bVal = b.comment || '';
+        break;
+      default:
+        aVal = new Date(a.timestamp).getTime();
+        bVal = new Date(b.timestamp).getTime();
+    }
+
+    if (aVal < bVal) return experienceSort.direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return experienceSort.direction === 'asc' ? 1 : -1;
+    return 0;
   });
 
   // Auth Gate
@@ -237,7 +413,7 @@ export default function VendorPortalPage() {
           <div>
 
             <h1 className="text-3xl font-black text-slate-900 tracking-tight">
-              PedsER System Dashboard
+              REVAMP System Dashboard
             </h1>
             <p className="text-sm text-slate-600 mt-1">
               Quality Assurance, anonymized clinical analytics, and healthcare provider accuracy metrics.
@@ -262,14 +438,13 @@ export default function VendorPortalPage() {
           </div>
         </div>
 
-        {/* Stats Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {/* Card 1 */}
           <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-2xs space-y-2 relative overflow-hidden">
             <div className="absolute right-4 top-4 w-10 h-10 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600">
               <Users className="w-5 h-5" />
             </div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Triage Evaluations</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Triage</p>
             <p className="text-3xl font-black text-slate-900">{triageCases.length}</p>
             <p className="text-[10px] text-slate-500 font-semibold">Total digital intake cases recorded</p>
           </div>
@@ -279,9 +454,9 @@ export default function VendorPortalPage() {
             <div className="absolute right-4 top-4 w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
               <Mail className="w-5 h-5" />
             </div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Referrals Emailed</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Summary</p>
             <p className="text-3xl font-black text-slate-900">{pcpEmailsCount}</p>
-            <p className="text-[10px] text-slate-500 font-semibold">Summaries sent to PCP / parent email</p>
+            <p className="text-[10px] text-slate-500 font-semibold">Summaries sent to parent email</p>
           </div>
 
           {/* Card 3 */}
@@ -289,7 +464,7 @@ export default function VendorPortalPage() {
             <div className="absolute right-4 top-4 w-10 h-10 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600">
               <MessageSquare className="w-5 h-5" />
             </div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Provider Reviews</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Reviews</p>
             <p className="text-3xl font-black text-slate-900">{providerFeedbacks.length}</p>
             <p className="text-[10px] text-slate-500 font-semibold">Healthcare audit cases submitted</p>
           </div>
@@ -299,13 +474,26 @@ export default function VendorPortalPage() {
             <div className="absolute right-4 top-4 w-10 h-10 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
               <Star className="w-5 h-5 fill-emerald-600 text-emerald-600" />
             </div>
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Clinical Audits</p>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Review Scores</p>
             <div className="space-y-1 pt-1 text-slate-700">
               <p className="text-xs">Decision Accuracy: <strong>{avgRating}/5</strong></p>
               <p className="text-xs">Form Access Ease: <strong>{avgAccessRating}/5</strong></p>
               <p className="text-xs">Report Completeness: <strong>{avgCompletenessRating}/5</strong></p>
             </div>
-            <p className="text-[9px] text-slate-500 font-semibold mt-1">Average clinician rating scores</p>
+            <p className="text-[9px] text-slate-500 font-semibold mt-1">Average provider ratings</p>
+          </div>
+
+          {/* Card 5 */}
+          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-2xs space-y-2 relative overflow-hidden">
+            <div className="absolute right-4 top-4 w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+              <Smile className="w-5 h-5" />
+            </div>
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Pt Experience</p>
+            <div className="space-y-1 pt-1 text-slate-700">
+              <p className="text-xs">Total Reviews: <strong>{experienceFeedbacks.length}</strong></p>
+              <p className="text-xs">Average Rating: <strong>{avgExperienceRating}/5</strong></p>
+            </div>
+            <p className="text-[9px] text-slate-500 font-semibold mt-1">Anonymized parent satisfaction</p>
           </div>
         </div>
 
@@ -331,6 +519,16 @@ export default function VendorPortalPage() {
             <MessageSquare className="w-4 h-4" />
             Provider Qualitative Feedback
           </button>
+          <button
+            onClick={() => setActiveTab('experience')}
+            className={`py-3.5 px-6 font-bold text-sm border-b-2 transition-all flex items-center gap-2 ${activeTab === 'experience'
+              ? 'border-indigo-600 text-indigo-700 font-extrabold'
+              : 'border-transparent text-slate-500 hover:text-slate-700'
+              }`}
+          >
+            <Smile className="w-4 h-4" />
+            Other Feedback
+          </button>
         </div>
 
         {/* Content Section */}
@@ -350,8 +548,8 @@ export default function VendorPortalPage() {
                 <div className="bg-white rounded-3xl border border-slate-200 shadow-card-soft overflow-hidden">
                   <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
-                      <h3 className="text-base font-bold text-slate-900">Anonymized Patient Triage Audits</h3>
-                      <p className="text-xs text-slate-505">List of captured triage evaluations showing clinical classification, demographic summary, email referral status, and linked provider ratings.</p>
+                      <h3 className="text-base font-bold text-slate-900">Anonymized Triage Audits</h3>
+                      <p className="text-xs text-slate-505"></p>
                     </div>
                     {/* FSA filter */}
                     <div className="relative max-w-xs w-full">
@@ -374,19 +572,35 @@ export default function VendorPortalPage() {
                     ) : (
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
-                          <tr className="bg-slate-50 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
-                            <th className="p-4">Reference ID</th>
-                            <th className="p-4">Date</th>
-                            <th className="p-4">Age</th>
-                            <th className="p-4 text-center">Location</th>
-                            <th className="p-4">Triage Classification</th>
-                            <th className="p-4">Email Status</th>
-                            <th className="p-4">Clinical Audit</th>
-                            <th className="p-4">Patient Feedback</th>
+                          <tr className="bg-slate-550 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('refId')}>
+                              Reference ID {getSortIndicator(triageSort, 'refId')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('timestamp')}>
+                              Date {getSortIndicator(triageSort, 'timestamp')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('age')}>
+                              Age {getSortIndicator(triageSort, 'age')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition text-center" onClick={() => toggleTriageSort('location')}>
+                              Location {getSortIndicator(triageSort, 'location')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('category')}>
+                              Triage Classification {getSortIndicator(triageSort, 'category')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('email')}>
+                              Email Status {getSortIndicator(triageSort, 'email')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('audit')}>
+                              Clinical Audit {getSortIndicator(triageSort, 'audit')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleTriageSort('feedback')}>
+                              Patient Feedback {getSortIndicator(triageSort, 'feedback')}
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-150">
-                          {filteredTriageCases.map((c) => {
+                          {sortedTriageCases.map((c) => {
                             const feedback = getProviderFeedbackForCase(c.refId);
                             return (
                               <tr key={c.id} className="hover:bg-slate-50/50">
@@ -481,22 +695,32 @@ export default function VendorPortalPage() {
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
                           <tr className="bg-slate-550 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
-                            <th className="p-4">Reference ID</th>
-                            <th className="p-4">Date</th>
-                            <th className="p-4">Accuracy</th>
-                            <th className="p-4">Ease of Access</th>
-                            <th className="p-4">Completeness</th>
-                            <th className="p-4">Clinical Comments</th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('refId')}>
+                              Reference ID {getSortIndicator(providerSort, 'refId')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('timestamp')}>
+                              Date {getSortIndicator(providerSort, 'timestamp')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('rating')}>
+                              Accuracy {getSortIndicator(providerSort, 'rating')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('accessRating')}>
+                              Ease of Access {getSortIndicator(providerSort, 'accessRating')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleProviderSort('completenessRating')}>
+                              Completeness {getSortIndicator(providerSort, 'completenessRating')}
+                            </th>
+                            <th className="p-4">
+                              Clinical Comments
+                            </th>
                             <th className="p-4 text-right">Actions</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-150">
-                          {providerFeedbacks.map((f) => (
+                          {sortedProviderFeedbacks.map((f) => (
                             <tr key={f.id} className="hover:bg-slate-50/50">
-                              <td className="p-4">
-                                <span className="text-xs font-bold text-indigo-750 bg-indigo-50 border border-indigo-200 px-2.5 py-1 rounded-full">
-                                  {f.refId}
-                                </span>
+                              <td className="p-4 font-bold text-slate-900 whitespace-nowrap">
+                                {f.refId}
                               </td>
                               <td className="p-4 text-slate-550">
                                 {new Date(f.timestamp).toLocaleDateString()}
@@ -530,19 +754,88 @@ export default function VendorPortalPage() {
                                   <span className="text-slate-400 italic text-[10px]">N/A</span>
                                 )}
                               </td>
-                              <td className="p-4 max-w-[300px]">
-                                <p className="text-slate-700 italic leading-relaxed truncate" title={f.comment}>
+                              <td className="p-4 max-w-[400px]">
+                                <p className="text-slate-700 italic leading-relaxed whitespace-normal break-words" title={f.comment}>
                                   {f.comment ? `"${f.comment}"` : 'No clinical comments provided.'}
                                 </p>
                               </td>
                               <td className="p-4 text-right">
                                 <button
                                   onClick={() => handleShowCaseDetails(f.refId)}
-                                  className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-600 hover:text-indigo-800 transition"
+                                  className="inline-flex items-center justify-center text-indigo-600 hover:text-indigo-800 hover:bg-indigo-50 p-2 rounded-xl transition shadow-2xs"
+                                  title="Inspect Case"
                                 >
-                                  <FileText className="w-3.5 h-3.5" />
-                                  <span>Inspect Case</span>
+                                  <FileText className="w-4 h-4" />
                                 </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Tab 3: OTHER FEEDBACK */}
+            {activeTab === 'experience' && (
+              <div className="space-y-6">
+                {experienceFeedbacks.length === 0 ? (
+                  <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-slate-400 text-xs font-semibold">
+                    No parent experience feedback submissions recorded yet.
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-3xl border border-slate-200 shadow-card-soft overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs border-collapse">
+                        <thead>
+                          <tr className="bg-slate-50 border-b border-slate-100 text-slate-455 font-bold uppercase tracking-wider">
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleExperienceSort('timestamp')}>
+                              Date {getSortIndicator(experienceSort, 'timestamp')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleExperienceSort('visitType')}>
+                              Service Used {getSortIndicator(experienceSort, 'visitType')}
+                            </th>
+                            <th className="p-4 cursor-pointer hover:bg-slate-100 select-none transition" onClick={() => toggleExperienceSort('rating')}>
+                              Experience Rating {getSortIndicator(experienceSort, 'rating')}
+                            </th>
+                            <th className="p-4">
+                              Patient Comments & Suggestions
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-150">
+                          {sortedExperienceFeedbacks.map((f) => (
+                            <tr key={f.id} className="hover:bg-slate-50/50">
+                              <td className="p-4 text-slate-550">
+                                {new Date(f.timestamp).toLocaleDateString()}
+                              </td>
+                              <td className="p-4 font-semibold text-slate-800">
+                                <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-slate-900 text-white capitalize">
+                                  {f.visitType === 'triage'
+                                    ? 'Digital Triage Tool'
+                                    : f.visitType === 'er-summary'
+                                      ? 'Triage Summary Email'
+                                      : f.visitType === 'faq'
+                                        ? 'FAQ Portal'
+                                        : f.visitType === 'education'
+                                          ? 'Educational Materials'
+                                          : f.visitType || 'General'}
+                                </span>
+                              </td>
+                              <td className="p-4">
+                                <div className="flex items-center gap-0.5 text-amber-500" title={`Rating: ${f.rating}/5`}>
+                                  {Array.from({ length: 5 }).map((_, i) => (
+                                    <Star key={i} className={`w-3.5 h-3.5 ${i < f.rating ? 'fill-current' : 'text-slate-200'}`} />
+                                  ))}
+                                </div>
+                              </td>
+
+                              <td className="p-4">
+                                <p className="text-slate-700 italic leading-relaxed" style={{ maxWidth: '350px', wordBreak: 'break-word' }}>
+                                  {f.comment ? `"${f.comment}"` : 'No text comments provided.'}
+                                </p>
                               </td>
                             </tr>
                           ))}

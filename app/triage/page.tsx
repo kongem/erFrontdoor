@@ -14,7 +14,7 @@ import {
 import { RED_FLAG_SYMPTOMS, SYMPTOMS_BY_PRIMARY, PrimarySymptom } from '@/lib/aboutKidsHealthLogic';
 import PrintableSummaryModal from '@/components/PrintableSummaryModal';
 import ExitFeedbackModal from '@/components/ExitFeedbackModal';
-import HelpfulnessRating from '@/components/HelpfulnessRating';
+
 import {
   ArrowLeft,
   ArrowRight,
@@ -116,23 +116,7 @@ export default function TriageWizardPage() {
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
 
-        {/* Top Header Navigation */}
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-teal-700 hover:text-teal-900 bg-teal-50 hover:bg-teal-100 border border-teal-200/80 px-3.5 py-1.5 rounded-full transition"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Return to Home</span>
-          </Link>
 
-          <button
-            onClick={handleExitAssessment}
-            className="text-xs font-semibold text-slate-500 hover:text-slate-800 underline"
-          >
-            Exit Assessment
-          </button>
-        </div>
 
         {/* Step Progress Bar Header */}
         <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-card-soft space-y-4">
@@ -837,8 +821,7 @@ export default function TriageWizardPage() {
               </button>
             </div>
 
-            {/* RATING WIDGET */}
-            <HelpfulnessRating />
+
 
             {/* MODALS INTEGRATION */}
             <PrintableSummaryModal

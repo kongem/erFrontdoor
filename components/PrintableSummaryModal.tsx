@@ -78,10 +78,10 @@ export default function PrintableSummaryModal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative space-y-6">
+      <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col p-6 sm:p-8 shadow-2xl border border-slate-200 relative space-y-6">
 
         {/* Header Action Buttons */}
-        <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-4 flex-shrink-0">
           <div className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-teal-600" />
             <h3 className="text-lg font-bold text-slate-900">
@@ -99,7 +99,7 @@ export default function PrintableSummaryModal({
         </div>
 
         {/* PRINTABLE DOCUMENT BODY */}
-        <div className="space-y-6 text-slate-800 text-xs sm:text-sm">
+        <div className="space-y-6 text-slate-800 text-xs sm:text-sm overflow-y-auto pr-2 flex-grow min-h-0">
           {/* Document Header */}
           <div className="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
             <div>
@@ -235,7 +235,7 @@ export default function PrintableSummaryModal({
         </div>
 
         {/* Modal Footer with Email Input & Send to Email Button */}
-        <div className="pt-4 border-t border-slate-200 space-y-3">
+        <div className="pt-4 border-t border-slate-200 space-y-3 flex-shrink-0">
           {sentSuccess && (
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between text-xs text-emerald-900">
               <div className="flex items-center gap-2 font-semibold">

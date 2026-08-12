@@ -1946,5 +1946,147 @@
     "selectedTags": [],
     "comment": "",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786502295282-3137",
+    "timestamp": "2026-08-12T02:38:15.282Z",
+    "updatedAt": "2026-08-12T02:38:15.282Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-454194",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 10,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L5N6P2"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
+  },
+  {
+    "id": "ENTRY-1786502333517-771",
+    "timestamp": "2026-08-12T02:38:53.517Z",
+    "updatedAt": "2026-08-12T02:38:53.517Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-475436",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L5N6P2"
+    },
+    "symptoms": {
+      "primarySymptom": "head_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
+  },
+  {
+    "id": "ENTRY-EXPERIENCE-FEEDBACK-1",
+    "timestamp": "2026-08-11T12:00:00.000Z",
+    "type": "experience_feedback",
+    "rating": 5,
+    "visitType": "triage",
+    "selectedTags": [
+      "Fast Triage",
+      "Clean UI"
+    ],
+    "comment": "The system was incredibly fast and easy to use. The advice to visit KidCare clinic was very helpful!"
+  },
+  {
+    "id": "ENTRY-EXPERIENCE-FEEDBACK-2",
+    "timestamp": "2026-08-11T14:30:00.000Z",
+    "type": "experience_feedback",
+    "rating": 4,
+    "visitType": "er-summary",
+    "selectedTags": [
+      "Clarity of Instructions"
+    ],
+    "comment": "I appreciated the email summary, I was able to print it out and show it to Dr. Watson at our clinic."
+  },
+  {
+    "id": "ENTRY-EXPERIENCE-FEEDBACK-3",
+    "timestamp": "2026-08-11T16:15:00.000Z",
+    "type": "experience_feedback",
+    "rating": 5,
+    "visitType": "triage",
+    "selectedTags": [
+      "Reassuring Care Guidance",
+      "Clean UI"
+    ],
+    "comment": "Very reassurance oriented. Saved us a long trip to the emergency room at midnight!"
+  },
+  {
+    "id": "ENTRY-1786502689375-7191",
+    "timestamp": "2026-08-12T02:44:49.375Z",
+    "type": "experience_feedback",
+    "refId": null,
+    "rating": 5,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": null,
+    "visitType": "education",
+    "selectedTags": [
+      "Clarity of Instructions",
+      "Fast Triage"
+    ],
+    "comment": "good tools",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   }
 ]
