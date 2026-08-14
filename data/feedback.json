@@ -2501,5 +2501,85 @@
     "selectedTags": [],
     "comment": "",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786529092236-9144",
+    "timestamp": "2026-08-12T10:04:52.236Z",
+    "updatedAt": "2026-08-12T10:04:52.236Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-745052",
+    "emailSent": false,
+    "child": {
+      "name": "Enoch MING LOK KONG",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": null,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L5N6P2"
+    },
+    "symptoms": {
+      "primarySymptom": "abdominal_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "abd_stress",
+        "abd_constipation",
+        "abd_cramping"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Mild cramping belly pain, Constipation related pain, Anxiety/stress related pain) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for abdominal pain."
+    }
+  },
+  {
+    "id": "ENTRY-1786529108606-1553",
+    "timestamp": "2026-08-12T10:05:08.606Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-745052",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786670880861-4765",
+    "timestamp": "2026-08-14T01:28:00.861Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-100015",
+    "rating": 5,
+    "accessRating": 5,
+    "completenessRating": 4,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
   }
 ]

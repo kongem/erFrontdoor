@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   Search,
@@ -17,7 +17,8 @@ import {
   HeartPulse,
   Lock,
   Eye,
-  EyeOff
+  EyeOff,
+  Send
 } from 'lucide-react';
 
 const anonymizeName = (name?: string) => {
@@ -53,6 +54,193 @@ export default function StaffPortalPage() {
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Chatbot State
+  const [messages, setMessages] = useState<any[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [currentStage, setCurrentStage] = useState<'ask_accuracy' | 'ask_accessibility' | 'ask_completeness' | 'ask_freetext' | 'complete'>('ask_accuracy');
+  
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Effect to scroll to bottom of chat
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  // Effect to reset chatbot state when a new case is loaded
+  useEffect(() => {
+    if (caseData) {
+      setRating(0);
+      setAccessRating(0);
+      setCompletenessRating(0);
+      setComment('');
+      setSubmitSuccess(false);
+      setCurrentStage('ask_accuracy');
+      setMessages([
+        {
+          id: '1',
+          sender: 'bot',
+          text: `Hi! I am the provider feedback assistant. Thank you for inspecting case **${caseData.refId}**.\n\nFirst, how would you rate the **Triage Decision Accuracy**?`,
+          timestamp: new Date(),
+          isStarRating: true,
+          ratingType: 'accuracy',
+        },
+      ]);
+    } else {
+      setMessages([]);
+    }
+  }, [caseData]);
+
+  // Handle star rating click in the chat message bubble
+  const handleStarRatingSelect = (starVal: number, ratingType: 'accuracy' | 'accessibility' | 'completeness') => {
+    if (ratingType === 'accuracy') {
+      setRating(starVal);
+      const userMsgId = Date.now().toString();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: userMsgId,
+          sender: 'user',
+          text: `Selected accuracy rating: **${starVal}** / 5 stars`,
+          timestamp: new Date(),
+        },
+      ]);
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString() + '_bot',
+            sender: 'bot',
+            text: `Got it: ${starVal}/5 stars. Next, **was this form easy to access?**`,
+            timestamp: new Date(),
+            isStarRating: true,
+            ratingType: 'accessibility',
+          },
+        ]);
+        setCurrentStage('ask_accessibility');
+      }, 500);
+    } else if (ratingType === 'accessibility') {
+      setAccessRating(starVal);
+      const userMsgId = Date.now().toString();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: userMsgId,
+          sender: 'user',
+          text: `Selected ease of access rating: **${starVal}** / 5 stars`,
+          timestamp: new Date(),
+        },
+      ]);
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString() + '_bot',
+            sender: 'bot',
+            text: `Understood. Third, **was the summary report complete?**`,
+            timestamp: new Date(),
+            isStarRating: true,
+            ratingType: 'completeness',
+          },
+        ]);
+        setCurrentStage('ask_completeness');
+      }, 500);
+    } else if (ratingType === 'completeness') {
+      setCompletenessRating(starVal);
+      const userMsgId = Date.now().toString();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: userMsgId,
+          sender: 'user',
+          text: `Selected report completeness rating: **${starVal}** / 5 stars`,
+          timestamp: new Date(),
+        },
+      ]);
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString() + '_bot',
+            sender: 'bot',
+            text: `Perfect. Finally, do you have any other discrepancies, clinical notes, or comments? (You can type **"none"** if there is none.)`,
+            timestamp: new Date(),
+          },
+        ]);
+        setCurrentStage('ask_freetext');
+      }, 500);
+    }
+  };
+
+  // Submit feedback directly from the chat freetext input
+  const submitChatFeedback = async (freetextComment: string) => {
+    if (!caseData) return;
+    const finalComment = freetextComment.trim().toLowerCase() === 'none' ? '' : freetextComment.trim();
+    setComment(finalComment);
+    setSubmitting(true);
+    
+    try {
+      const res = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'provider_feedback',
+          refId: caseData.refId,
+          rating,
+          accessRating: accessRating || 5, // fallback if somehow not set
+          completenessRating: completenessRating || 5,
+          comment: finalComment,
+        }),
+      });
+      const result = await res.json();
+      if (result.success) {
+        setSubmitSuccess(true);
+        setCurrentStage('complete');
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString() + '_bot',
+            sender: 'bot',
+            text: `Thank you! Feedback logged. Your case audit has been registered successfully.`,
+            timestamp: new Date(),
+          },
+        ]);
+      } else {
+        alert('Failed to submit feedback. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error submitting feedback:', err);
+      alert('Failed to submit feedback. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Send a message from the text input box
+  const handleSendTextMessage = () => {
+    const val = inputValue.trim();
+    if (!val) return;
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now().toString(),
+        sender: 'user',
+        text: val,
+        timestamp: new Date(),
+      },
+    ]);
+    setInputValue('');
+
+    if (currentStage === 'ask_freetext') {
+      setTimeout(() => {
+        submitChatFeedback(val);
+      }, 500);
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -410,136 +598,126 @@ export default function StaffPortalPage() {
                 )}
               </div>
             </div>
-
-            {/* Provider Feedback Form */}
-            <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-6">
-              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3">
+            {/* Provider Feedback Form (Chatbot Version) */}
+            <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col space-y-4">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-3 flex-shrink-0">
                 <MessageSquare className="w-5 h-5 text-teal-600" />
-                Submit Verification Feedback
+                Verification Audit Assistant
               </h3>
 
-              {submitSuccess ? (
-                <div className="text-center py-8 space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-250">
+              {submitSuccess && currentStage === 'complete' ? (
+                <div className="text-center py-8 space-y-4 flex-grow flex flex-col justify-center items-center">
+                  <div className="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center border border-emerald-250 animate-bounce">
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
                   <h4 className="text-xl font-bold text-slate-900">Feedback Logged!</h4>
-                  <p className="text-xs text-slate-600 max-w-xs mx-auto leading-relaxed">
+                  <p className="text-xs text-slate-655 max-w-xs mx-auto leading-relaxed">
                     Thank you. Your assessment details have been registered. This feedback is critical in refining our triage decision-making protocol.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleFeedbackSubmit} className="space-y-6">
-                  {/* Accuracy Rating Selector */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                      Triage Decision Accuracy *
-                    </label>
-                    <div className="flex items-center gap-1.5">
-                      {[1, 2, 3, 4, 5].map((star) => {
-                        const filled = hoverRating ? star <= hoverRating : star <= rating;
-                        return (
-                          <button
-                            key={star}
-                            type="button"
-                            onClick={() => setRating(star)}
-                            onMouseEnter={() => setHoverRating(star)}
-                            onMouseLeave={() => setHoverRating(0)}
-                            className="p-1 text-slate-350 hover:scale-110 transition-transform"
-                          >
-                            <Star
-                              className={`w-8 h-8 transition-colors ${filled ? 'text-amber-500 fill-amber-500' : 'text-slate-305'}`}
-                            />
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <span className="text-[10px] text-slate-500 block">
-                      Rate how accurate the care recommendation is (1 = completely wrong, 5 = perfect accuracy)
-                    </span>
-                  </div>
-
-                  {/* Access Ease Selector */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                      Was this form easy to access? *
-                    </label>
-                    <div className="flex items-center gap-1.5">
-                      {[1, 2, 3, 4, 5].map((star) => {
-                        const filled = hoverAccessRating ? star <= hoverAccessRating : star <= accessRating;
-                        return (
-                          <button
-                            key={star}
-                            type="button"
-                            onClick={() => setAccessRating(star)}
-                            onMouseEnter={() => setHoverAccessRating(star)}
-                            onMouseLeave={() => setHoverAccessRating(0)}
-                            className="p-1 text-slate-350 hover:scale-110 transition-transform"
-                          >
-                            <Star
-                              className={`w-8 h-8 transition-colors ${filled ? 'text-amber-500 fill-amber-500' : 'text-slate-305'}`}
-                            />
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <span className="text-[10px] text-slate-500 block">
-                      Rate the accessibility of this clinician audit view (1 = difficult, 5 = effortless)
-                    </span>
-                  </div>
-
-                  {/* Completeness Selector */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                      Was the summary report complete? *
-                    </label>
-                    <div className="flex items-center gap-1.5">
-                      {[1, 2, 3, 4, 5].map((star) => {
-                        const filled = hoverCompletenessRating ? star <= hoverCompletenessRating : star <= completenessRating;
-                        return (
-                          <button
-                            key={star}
-                            type="button"
-                            onClick={() => setCompletenessRating(star)}
-                            onMouseEnter={() => setHoverCompletenessRating(star)}
-                            onMouseLeave={() => setHoverCompletenessRating(0)}
-                            className="p-1 text-slate-350 hover:scale-110 transition-transform"
-                          >
-                            <Star
-                              className={`w-8 h-8 transition-colors ${filled ? 'text-amber-500 fill-amber-500' : 'text-slate-305'}`}
-                            />
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <span className="text-[10px] text-slate-500 block">
-                      Rate how complete the patient profile summary report was (1 = major details missing, 5 = fully complete)
-                    </span>
-                  </div>
-
-                  {/* Comment Textarea */}
-                  <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                      Discrepancies or Missing Info (Optional)
-                    </label>
-                    <textarea
-                      rows={5}
-                      placeholder="Add any specific clinical notes, missing diagnostic clues, or feedback on triage protocol inaccuracies..."
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white leading-normal"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm py-3.5 rounded-xl transition flex items-center justify-center gap-2 shadow-sm"
+                <div className="flex-grow flex flex-col min-h-0 space-y-4">
+                  {/* Chat Message Stream */}
+                  <div 
+                    ref={chatContainerRef}
+                    className="h-[380px] overflow-y-auto border border-slate-150 rounded-2xl p-4 bg-slate-50/50 space-y-4"
                   >
-                    <ShieldCheck className="w-5 h-5 text-teal-200" />
-                    <span>{submitting ? 'Submitting Feedback...' : 'Submit Case Audit'}</span>
-                  </button>
-                </form>
+                    {messages.map((msg, index) => {
+                      const isBot = msg.sender === 'bot';
+                      return (
+                        <div key={msg.id || index} className={`flex items-start gap-2 ${isBot ? 'justify-start' : 'justify-end'}`}>
+                          {isBot && (
+                            <div className="w-6 h-6 rounded-full bg-teal-100 border border-teal-205 flex items-center justify-center text-teal-700 flex-shrink-0 mt-0.5 shadow-2xs">
+                              <Activity className="w-3.5 h-3.5" />
+                            </div>
+                          )}
+                          <div className="space-y-2 max-w-[85%]">
+                            <div className={`p-3 rounded-xl text-xs leading-relaxed shadow-card-soft ${
+                              isBot 
+                                ? 'bg-white border border-slate-150 text-slate-800 rounded-tl-none' 
+                                : 'bg-teal-600 text-white font-medium rounded-tr-none'
+                            }`}>
+                              <div dangerouslySetInnerHTML={{ __html: msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
+                            </div>
+
+                             {isBot && msg.isStarRating && (
+                              (msg.ratingType === 'accuracy' && currentStage === 'ask_accuracy') ||
+                              (msg.ratingType === 'accessibility' && currentStage === 'ask_accessibility') ||
+                              (msg.ratingType === 'completeness' && currentStage === 'ask_completeness')
+                             ) && (
+                               <div className="bg-white border border-slate-150 rounded-xl p-2.5 shadow-sm inline-flex items-center gap-1 mt-1">
+                                 {[1, 2, 3, 4, 5].map((star) => {
+                                   let filled = false;
+                                   let setHover: (val: number) => void = () => {};
+
+                                   if (msg.ratingType === 'accuracy') {
+                                     filled = hoverRating ? star <= hoverRating : star <= rating;
+                                     setHover = setHoverRating;
+                                   } else if (msg.ratingType === 'accessibility') {
+                                     filled = hoverAccessRating ? star <= hoverAccessRating : star <= accessRating;
+                                     setHover = setHoverAccessRating;
+                                   } else if (msg.ratingType === 'completeness') {
+                                     filled = hoverCompletenessRating ? star <= hoverCompletenessRating : star <= completenessRating;
+                                     setHover = setHoverCompletenessRating;
+                                   }
+
+                                   return (
+                                     <button
+                                       key={star}
+                                       type="button"
+                                       onClick={() => handleStarRatingSelect(star, msg.ratingType)}
+                                       onMouseEnter={() => setHover(star)}
+                                       onMouseLeave={() => setHover(0)}
+                                       className="p-1 hover:scale-125 transition-transform"
+                                     >
+                                       <Star 
+                                         className={`w-6 h-6 transition-colors ${
+                                           filled 
+                                             ? 'text-amber-500 fill-amber-500' 
+                                             : 'text-slate-300 fill-transparent'
+                                         }`} 
+                                       />
+                                     </button>
+                                   );
+                                 })}
+                               </div>
+                             )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                    <div ref={messagesEndRef} />
+                  </div>
+
+                  {/* Input Form Box at the bottom */}
+                  <div className="flex gap-2 items-center flex-shrink-0">
+                    <input
+                      type="text"
+                      disabled={currentStage !== 'ask_freetext'}
+                      placeholder={
+                        currentStage === 'ask_freetext'
+                          ? "Type clinical notes (or 'none')..."
+                          : "Select star ratings above..."
+                      }
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSendTextMessage();
+                        }
+                      }}
+                      className="flex-grow px-3.5 py-2.5 bg-slate-50 border border-slate-205 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
+                    />
+                    <button
+                      type="button"
+                      disabled={currentStage !== 'ask_freetext' || !inputValue.trim()}
+                      onClick={handleSendTextMessage}
+                      className="bg-teal-600 hover:bg-teal-700 disabled:bg-slate-200 text-white p-3 rounded-xl shadow-xs disabled:shadow-none transition flex-shrink-0"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
           </div>

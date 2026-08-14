@@ -34,7 +34,8 @@ import {
   Info,
   ChevronRight,
   ExternalLink,
-  Heart
+  Heart,
+  Home
 } from 'lucide-react';
 
 export default function TriageWizardPage() {
@@ -1179,11 +1180,11 @@ export default function TriageWizardPage() {
               </div>
 
               <button
-                onClick={resetTriage}
-                className="text-xs font-bold text-rose-600 hover:text-rose-800 flex items-center gap-1.5 underline"
+                onClick={() => setExitModalOpen(true)}
+                className="text-xs font-bold text-slate-900 hover:text-slate-700 flex items-center gap-1.5 underline"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Start New Triage</span>
+                <Home className="w-3.5 h-3.5" />
+                <span>Return to Homepage</span>
               </button>
             </div>
 
