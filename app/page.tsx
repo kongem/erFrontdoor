@@ -240,7 +240,7 @@ export default function LandingPage() {
 
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15] max-w-3xl">
-              Fast, Reassuring Care Guidance for Your <span className="bg-gradient-to-r from-teal-600 via-teal-700 to-sky-600 bg-clip-text text-transparent">Child’s Health</span>
+              Giving your Child the <span className="bg-gradient-to-r from-teal-600 via-teal-700 to-sky-600 bg-clip-text text-transparent">Right</span> Care, at the <span className="bg-gradient-to-r from-teal-600 via-teal-700 to-sky-600 bg-clip-text text-transparent">Right</span> Time.
             </h1>
 
             <p className="text-lg sm:text-xl text-slate-600 max-w-2xl font-normal leading-relaxed">
