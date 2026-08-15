@@ -98,6 +98,7 @@ const DEFAULT_CHILD: ChildInfo = {
   email: 've.polo@mail.utoronto.ca',
   ageInMonths: 24, // 2 years default
   sex: 'Prefer not to say',
+  weightKg: 8.5,
   hasChronicConditions: false,
 };
 

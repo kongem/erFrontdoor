@@ -2877,5 +2877,70 @@
     "selectedTags": [],
     "comment": "",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803866912-3451",
+    "timestamp": "2026-08-15T14:24:26.912Z",
+    "updatedAt": "2026-08-15T14:24:26.912Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-806091",
+    "emailSent": true,
+    "child": {
+      "name": "eMHI DEMO",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 8.5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L4J 0L5"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    },
+    "emailDetails": {
+      "doctorName": "Parent 1",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-15T14:24:35.532Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786803879316-327",
+    "timestamp": "2026-08-15T14:24:39.316Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-806091",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
   }
 ]

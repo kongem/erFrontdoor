@@ -1,9 +1,8 @@
 {
-  "/api/feedback/route": "app/api/feedback/route.js",
-  "/api/triage/route": "app/api/triage/route.js",
-  "/provider/page": "app/provider/page.js",
-  "/feedback/page": "app/feedback/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
   "/triage/page": "app/triage/page.js",
-  "/vendor/page": "app/vendor/page.js"
+  "/api/triage/route": "app/api/triage/route.js",
+  "/api/email-pcp/route": "app/api/email-pcp/route.js",
+  "/api/feedback/route": "app/api/feedback/route.js"
 }
