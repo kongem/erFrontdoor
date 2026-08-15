@@ -2581,5 +2581,301 @@
     "selectedTags": [],
     "comment": "",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803225993-5848",
+    "timestamp": "2026-08-15T14:13:45.993Z",
+    "updatedAt": "2026-08-15T14:13:45.993Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-337539",
+    "emailSent": true,
+    "child": {
+      "name": "eMHI DEMO",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 5,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L4J 0L5"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "sti_instability"
+      ],
+      "selectedSecondarySymptoms": [
+        "sti_partial_movement"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Joint Instability / Giving Way) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "sti_instability"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for soft tissue_injury. Seek emergency care immediately."
+    },
+    "emailDetails": {
+      "doctorName": "Parent 1",
+      "doctorEmail": "kongenoch@gmail.com",
+      "timestamp": "2026-08-15T14:14:01.977Z"
+    }
+  },
+  {
+    "id": "ENTRY-1786803246103-6052",
+    "timestamp": "2026-08-15T14:14:06.103Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-337539",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803291506-4837",
+    "timestamp": "2026-08-15T14:14:51.506Z",
+    "type": "provider_feedback",
+    "refId": "PEDS-TRG-337539",
+    "rating": 5,
+    "accessRating": 5,
+    "completenessRating": 5,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": null,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "Thanks for sending this child",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803348768-619",
+    "timestamp": "2026-08-15T14:15:48.768Z",
+    "type": "experience_feedback",
+    "refId": null,
+    "rating": 5,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": null,
+    "visitType": "triage",
+    "selectedTags": [
+      "Clarity of Instructions",
+      "Fast Triage"
+    ],
+    "comment": "good",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803371673-6817",
+    "timestamp": "2026-08-15T14:16:11.673Z",
+    "updatedAt": "2026-08-15T14:16:11.673Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-115229",
+    "emailSent": false,
+    "child": {
+      "name": "eMHI DEMO",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 10,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L4J 0L5"
+    },
+    "symptoms": {
+      "primarySymptom": "head_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "LOW_PRIMARY_CARE",
+      "title": "Routine Care & Primary Pediatrician Follow-up",
+      "badgeText": "Routine Priority",
+      "badgeBg": "bg-teal-600 text-white",
+      "summary": "Your child’s symptoms appear mild and manageable at home. Follow up with your pediatrician if symptoms worsen or persist.",
+      "timeframeNotice": "Schedule a routine visit with your pediatrician if symptoms continue.",
+      "actionPlan": [
+        "Ensure your child gets plenty of rest and stays hydrated.",
+        "Monitor your child for any changes in temperature, pain level, or behavior.",
+        "Contact your pediatrician if symptoms do not improve after 48-72 hours, or if new symptoms develop."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Pediatrician / Family Doctor",
+      "disclaimer": "Home management guidance for mild pediatric symptoms."
+    }
+  },
+  {
+    "id": "ENTRY-1786803381799-2410",
+    "timestamp": "2026-08-15T14:16:21.799Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-115229",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803406685-7362",
+    "timestamp": "2026-08-15T14:16:46.685Z",
+    "updatedAt": "2026-08-15T14:16:46.685Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-375742",
+    "emailSent": false,
+    "child": {
+      "name": "eMHI DEMO",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 10,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L4J 0L5"
+    },
+    "symptoms": {
+      "primarySymptom": "soft_tissue_injury",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [],
+      "selectedSecondarySymptoms": [
+        "sti_mild_swelling"
+      ],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "MODERATE_URGENT_CARE",
+      "title": "Same-Day Urgent Care Recommended",
+      "badgeText": "Level 3 / 4 Priority",
+      "badgeBg": "bg-amber-500 text-white",
+      "summary": "Your child has symptoms (Bruising and localized swelling) that should be evaluated by a healthcare provider within 4–12 hours.",
+      "timeframeNotice": "Visit an Urgent Care Clinic.",
+      "actionPlan": [
+        "Visit an Urgent Care clinic or book a same-day appointment with your pediatrician/family doctor.",
+        "Encourage frequent rest, small sips of fluids, and keep the child comfortable.",
+        "Monitor closely: if any new red flags emerge (e.g. extreme lethargy, severe pain, breathing issues), head to the ER immediately."
+      ],
+      "redFlagsTriggered": [],
+      "recommendedFacilityType": "Urgent Care Clinic",
+      "disclaimer": "Guidance based on AboutKidsHealth care screening for soft tissue_injury."
+    }
+  },
+  {
+    "id": "ENTRY-1786803413114-2559",
+    "timestamp": "2026-08-15T14:16:53.114Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-375742",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
+  },
+  {
+    "id": "ENTRY-1786803438218-2203",
+    "timestamp": "2026-08-15T14:17:18.218Z",
+    "updatedAt": "2026-08-15T14:17:18.218Z",
+    "type": "triage_case",
+    "refId": "PEDS-TRG-968961",
+    "emailSent": false,
+    "child": {
+      "name": "eMHI DEMO",
+      "ageInMonths": 24,
+      "sex": "Prefer not to say",
+      "weightKg": 10,
+      "hasChronicConditions": false
+    },
+    "guardian": {
+      "relationship": "Parent",
+      "postalCode": "L4J 0L5"
+    },
+    "symptoms": {
+      "primarySymptom": "chest_pain",
+      "hasFever": false,
+      "feverTempCelsius": 38.5,
+      "feverDurationHours": 12,
+      "selectedRedFlags": [
+        "chest_palpitations",
+        "chest_syncope"
+      ],
+      "selectedSecondarySymptoms": [],
+      "additionalNotes": ""
+    },
+    "result": {
+      "category": "HIGH_EMERGENCY",
+      "title": "Immediate Emergency Care Recommended",
+      "badgeText": "Level 1 / 2 Priority",
+      "badgeBg": "bg-rose-600 text-white",
+      "summary": "Your child exhibits high-priority symptoms (Racing or Skipping Heartbeat, Fainting, Dizziness, or Lightheadedness) requiring immediate evaluation at an Emergency Department.",
+      "timeframeNotice": "Go to the nearest ER or Call 911 immediately.",
+      "actionPlan": [
+        "Call 911 immediately if your child is un-responsive, turning blue, or having breathing difficulty.",
+        "Head directly to the nearest Emergency Department (do not wait for an urgent care appointment).",
+        "Keep your child calm and do not administer solid food or heavy liquids if vomiting or lethargic.",
+        "Bring health insurance card, photo ID, and any current medication bottles."
+      ],
+      "redFlagsTriggered": [
+        "chest_palpitations",
+        "chest_syncope"
+      ],
+      "recommendedFacilityType": "Pediatric Emergency Room",
+      "disclaimer": "This recommendation is based on AboutKidsHealth clinical screening protocols for chest pain. Seek emergency care immediately."
+    }
+  },
+  {
+    "id": "ENTRY-1786803457850-7112",
+    "timestamp": "2026-08-15T14:17:37.850Z",
+    "type": "exit_survey",
+    "refId": "PEDS-TRG-968961",
+    "rating": null,
+    "accessRating": null,
+    "completenessRating": null,
+    "helpful": null,
+    "helpedDecide": null,
+    "skipped": true,
+    "visitType": null,
+    "selectedTags": [],
+    "comment": "",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36"
   }
 ]

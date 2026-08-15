@@ -1,3 +1,9 @@
 {
-  "/page": "app/page.js"
+  "/api/feedback/route": "app/api/feedback/route.js",
+  "/api/triage/route": "app/api/triage/route.js",
+  "/provider/page": "app/provider/page.js",
+  "/feedback/page": "app/feedback/page.js",
+  "/page": "app/page.js",
+  "/triage/page": "app/triage/page.js",
+  "/vendor/page": "app/vendor/page.js"
 }

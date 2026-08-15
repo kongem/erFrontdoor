@@ -75,27 +75,27 @@ export interface TriageState {
 }
 
 const DEFAULT_GUARDIAN: GuardianInfo = {
-  name: '',
-  email: '',
-  phone: '',
-  postalCode: '',
+  name: 'Parent 1',
+  email: 've.polo@mail.utoronto.ca',
+  phone: '647 700 8888',
+  postalCode: 'L4J 0L5',
   relationship: 'Parent',
 };
 
 const DEFAULT_CHILD: ChildInfo = {
-  firstName: '',
+  firstName: 'eMHI',
   middleName: '',
-  lastName: '',
-  name: '',
+  lastName: 'DEMO',
+  name: 'eMHI DEMO',
   dateOfBirth: '2024-08-01',
   sexAtBirth: 'Prefer not to say',
   ohipNumber: '',
-  address: '',
+  address: '404 eMHI Way',
   city: 'Toronto',
   province: 'ON',
-  postalCode: '',
-  phone: '',
-  email: '',
+  postalCode: 'L4J 0L5',
+  phone: '647 700 8888',
+  email: 've.polo@mail.utoronto.ca',
   ageInMonths: 24, // 2 years default
   sex: 'Prefer not to say',
   hasChronicConditions: false,
